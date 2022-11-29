@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +15,8 @@ namespace HooverGOL122022
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[5, 5];
+        bool[,] universe = new bool[10, 10];
+        bool[,] scratchpad = new bool[10, 10];
 
         // Drawing colors - changing cell colors
         Color gridColor = Color.Black;
@@ -39,7 +42,7 @@ namespace HooverGOL122022
         private void NextGeneration() //to boldly go where no one has gone before
         {
             //clear the scratchPad
-
+            ClearScratchpad();
 
 
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -47,25 +50,63 @@ namespace HooverGOL122022
                 // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
+                    ////clear the scratch pad
+                    //ClearScratchpad();
+
                     //get the neighbor count 
-                   // int count = CountNeighbor();
+                     int count = CountNeighborsToroidal(x,y);
 
-                   
+                    
+                    ////apply the rules and decide if cell should live or die in the next generation
+                    ////rule 1
+                    // Living cells with less than 2 living neighbors die in the next generation.
+                    if (universe[x, y] == true && count < 2)
+                    {
+                        scratchpad[x, y] = false;
+
+                    }
 
 
-                    //apply the rules and decide if cell should live or die in the next generation
+                    //rule 2
+                    // Living cells with more than 3 living neighbors die in the next generation.
+                    else if (universe[x, y] == true && count > 3)
+                    {
+                        scratchpad[x, y] = false;
+
+                    }
 
 
-                    //turn in on/off in the scratch pad(another 2d array you need to create similar to the universe array)
+                    //rule 3
+                    //Living cells with 2 or 3 living neighbors live in the next generation.
+                    else if (universe[x, y] == true && count == 2 || count == 3)
+                    {
+                        scratchpad[x, y] = true;
+
+                    }
 
 
+                    //rule 4
+                    //Dead cells with exactly 3 living neighbors live in the next generation.
+                    else if (universe[x, y] == false && count == 3)
+                    {
+                        scratchpad[x, y] = true;
+                    }
+                    else //the catchall for the remaining stationary cells
+                    {
+                        scratchpad[x, y] = universe[x, y];
+                    }
 
-                }
+
+                } 
             }
 
 
             //copy from the scratch pad to universe
 
+            bool[,] temp = new bool[10, 10];
+            universe = scratchpad;
+            scratchpad = temp;
+            
 
 
             // Increment generation count
@@ -75,6 +116,7 @@ namespace HooverGOL122022
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
 
             //place invalidate
+            graphicsPanel1.Invalidate();
         }
 
         // The event called by the timer every Interval milliseconds.
@@ -85,11 +127,11 @@ namespace HooverGOL122022
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
-            // Calculate the width and height of each cell in pixels // you need to do this math as float, so we have to figure out how to make the division be done as integers as well
+            // Calculate the width and height of each cell in pixels // you need to do this math as float, so we have to figure out how to make the division be done as float as well
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
-            int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
+            float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
-            int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
@@ -105,7 +147,7 @@ namespace HooverGOL122022
                 {
                     // A rectangle to represent each cell in pixels
                     //RectangleF - This is the float rectangle 
-                    Rectangle cellRect = Rectangle.Empty;
+                    RectangleF cellRect = RectangleF.Empty;
                     cellRect.X = x * cellWidth;
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
@@ -177,5 +219,174 @@ namespace HooverGOL122022
         //{
 
         //}
+
+        private int CountNeighborsFinite(int x, int y)
+        {
+            int count = 0;
+
+            int xLen = universe.GetLength(0);
+
+            int yLen = universe.GetLength(1);
+
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+
+            {
+
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
+
+                {
+
+                    int xCheck = x + xOffset;
+
+                    int yCheck = y + yOffset;
+
+                    // if xOffset and yOffset are both equal to 0 then continue
+                    if (xOffset == 0 && yOffset == 0)
+                    {
+                        continue;
+                    }
+                    // if xCheck is less than 0 then continue
+                    else if (xCheck < 0 )
+                    {
+                        continue;
+                    }
+                    // if yCheck is less than 0 then continue
+                    else if (yCheck < 0 )
+                    {
+                        continue;
+                    }
+                    // if xCheck is greater than or equal too xLen then continue
+                    else if (xCheck >= xLen)
+                    {
+                        continue;
+                    }
+                    // if yCheck is greater than or equal too yLen then continue
+                    else if (yCheck >= yLen)
+                    {
+                        continue;
+                    }
+
+                    else if (universe[xCheck, yCheck] == true) { count++; }
+                }
+            }
+            return count;
+        }
+
+        private int CountNeighborsToroidal(int x, int y)
+        {
+            int count = 0;
+
+            int xLen = universe.GetLength(0);
+
+            int yLen = universe.GetLength(1);
+
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+
+            {
+
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
+
+                {
+
+                    int xCheck = x + xOffset;
+
+                    int yCheck = y + yOffset;
+
+                    // if xOffset and yOffset are both equal to 0 then continue
+                    if (xOffset == 0 && yOffset == 0)
+                    {
+                        continue;
+                    }
+                    // if xCheck is less than 0 then set to xLen - 1
+                    else if (xCheck < 0)
+                    {
+                        xLen = -1;
+                    }
+                    // if yCheck is less than 0 then set to yLen - 1
+                    else if (yCheck < 0)
+                    {
+                        yLen = -1;
+                    }
+                    // if xCheck is greater than or equal too xLen then set to 0
+                    else if (xCheck >= xLen)
+                    {
+                        xLen = 0;
+                    }
+                    // if yCheck is greater than or equal too yLen then set to 0
+                    else if (yCheck >= yLen)
+                    {
+                        yLen = 0;
+                    }
+
+
+                    else if (universe[xCheck, yCheck] == true) { count++; }
+
+                }
+
+            }
+
+
+            return count;
+
+        }
+        public void ClearScratchpad()
+        {
+            for (int y = 0; y < scratchpad.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < scratchpad.GetLength(0); x++)
+                {
+                    scratchpad[x, y] = false;
+                }
+            }
+            
+        }
+        public void Clear()
+        {
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    scratchpad[x,y] = false;
+                    universe[x,y] = false;
+                }
+            }
+            generations= 0;
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clear();
+            ClearScratchpad();
+            
+            
+            
+            
+        }
+        private void RandomGame()
+        {
+           
+            // Cycle cells using rand to set live/dead cells
+            var rand = new Random();
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    // Random Board
+                    if (rand.Next(1, 101) < 75)
+                        universe[x, y] = false;
+                    else
+                        universe[x, y] = true;
+                }
+            }
+        }
     }
 }
+
