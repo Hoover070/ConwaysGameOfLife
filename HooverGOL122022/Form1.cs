@@ -28,6 +28,9 @@ namespace HooverGOL122022
         // Generation count
         int generations = 0;
 
+        //changeable count
+       bool toroidal = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -52,9 +55,16 @@ namespace HooverGOL122022
                 {
                     ////clear the scratch pad
                     //ClearScratchpad();
-
+                    int count;
                     //get the neighbor count 
-                     int count = CountNeighborsFinite(x,y);
+                    if(toroidal == true)
+                    {
+                         count = CountNeighborsToroidal(x, y); 
+                    }
+                    else 
+                         count = CountNeighborsFinite(x, y);
+                    
+                     
 
                     
                     ////apply the rules and decide if cell should live or die in the next generation
@@ -118,6 +128,7 @@ namespace HooverGOL122022
             //place invalidate
             graphicsPanel1.Invalidate();
         }
+
 
         // The event called by the timer every Interval milliseconds.
         private void Timer_Tick(object sender, EventArgs e)
@@ -361,7 +372,7 @@ namespace HooverGOL122022
             Clear();
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)//new
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)//new game
         {
             this.generations = -1;
             NextGeneration();
@@ -390,6 +401,12 @@ namespace HooverGOL122022
                         universe[x, y] = true;
                 }
             }
+        }
+
+        private void torodialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toroidal= true;
+
         }
     }
 }
