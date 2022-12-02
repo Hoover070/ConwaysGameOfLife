@@ -28,7 +28,7 @@ namespace HooverGOL122022
         // Generation count
         int generations = 0;
 
-        //changeable count
+        //changeable count // default is false, which is finite. Once the option is clicked in the menu it changes. 
        bool toroidal = false;
 
         public Form1()
@@ -311,22 +311,22 @@ namespace HooverGOL122022
                     // if xCheck is less than 0 then set to xLen - 1
                     else if (xCheck < 0)
                     {
-                        xLen = -1;
+                        xLen = universe.GetLength(-1);
                     }
                     // if yCheck is less than 0 then set to yLen - 1
                     else if (yCheck < 0)
                     {
-                        yLen = -1;
+                        yLen = universe.GetLength(-1);
                     }
                     // if xCheck is greater than or equal too xLen then set to 0
                     else if (xCheck >= xLen)
                     {
-                        xLen = 0;
+                        xLen = universe.GetLength(0);
                     }
                     // if yCheck is greater than or equal too yLen then set to 0
                     else if (yCheck >= yLen)
                     {
-                        yLen = 0;
+                        yLen = universe.GetLength(0);
                     }
 
 
@@ -407,6 +407,11 @@ namespace HooverGOL122022
         {
             toroidal= true;
 
+        }
+
+        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toroidal= false;
         }
     }
 }
