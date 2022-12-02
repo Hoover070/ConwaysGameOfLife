@@ -54,7 +54,7 @@ namespace HooverGOL122022
                     //ClearScratchpad();
 
                     //get the neighbor count 
-                     int count = CountNeighborsToroidal(x,y);
+                     int count = CountNeighborsFinite(x,y);
 
                     
                     ////apply the rules and decide if cell should live or die in the next generation
@@ -194,23 +194,23 @@ namespace HooverGOL122022
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)//close the program
         {
             this.Close();
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)//start the generations
         {
             timer.Enabled = true;
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)//pause the generartions
         {
             timer.Enabled = false;
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void toolStripButton3_Click(object sender, EventArgs e)//next generation
         {
             NextGeneration();
         }
@@ -352,7 +352,8 @@ namespace HooverGOL122022
                     universe[x,y] = false;
                 }
             }
-            generations= 0;
+            generations -= 1;
+            NextGeneration();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -360,12 +361,15 @@ namespace HooverGOL122022
             Clear();
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)//new
         {
-            Clear();
-            ClearScratchpad();
+            this.generations = -1;
+            NextGeneration();
             
-            
+            this.Clear();
+            this.ClearScratchpad();
+            timer.Enabled = false;
+
             
             
         }
