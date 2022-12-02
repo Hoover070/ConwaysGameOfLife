@@ -311,7 +311,7 @@ namespace HooverGOL122022
                     // if xCheck is less than 0 then set to xLen - 1
                     else if (xCheck < 0)
                     {
-                        xLen = universe.GetLength(-1);
+                        xLen = -1;
                     }
                     // if yCheck is less than 0 then set to yLen - 1
                     else if (yCheck < 0)
