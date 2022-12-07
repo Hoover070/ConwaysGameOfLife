@@ -15,8 +15,8 @@ namespace HooverGOL122022
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[10, 10];
-        bool[,] scratchpad = new bool[10, 10];
+        bool[,] universe = new bool[30, 30];
+        bool[,] scratchpad = new bool[30, 30];
 
         // Drawing colors - changing cell colors
         Color gridColor = Color.Black;
@@ -134,13 +134,13 @@ namespace HooverGOL122022
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
             float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
             // x10 cell width
-            float x10CellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0)/10;
+            float x10CellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0)*10;
             // x10 cell height
-            float x10CellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1) / 10;
+            float x10CellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1)*10;
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
-            Pen x10GridPen = new Pen(gridColor, 5);
+            Pen x10GridPen = new Pen(gridColor, 3);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
             
