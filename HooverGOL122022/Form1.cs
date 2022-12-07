@@ -133,13 +133,17 @@ namespace HooverGOL122022
             float cellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
             float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            // x10 cell width
+            float x10CellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0)/10;
+            // x10 cell height
+            float x10CellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1) / 10;
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
-
+            Pen x10GridPen = new Pen(gridColor, 5);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
-
+            
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -169,6 +173,39 @@ namespace HooverGOL122022
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
+            //for the x10 grid
+            for (int y = 0; y < universe.GetLength(1)/10; y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0)/10; x++)
+                {
+                    // A rectangle to represent each cell in pixels
+                    //RectangleF - This is the float rectangle 
+                    RectangleF cellRect = RectangleF.Empty;
+                    cellRect.X = x * x10CellWidth;
+                    cellRect.Y = y * x10CellHeight;
+                    cellRect.Width = x10CellWidth;
+                    cellRect.Height = x10CellHeight;
+
+                    // Fill the cell with a brush if alive
+                    if (universe[x, y] == true)
+                    {
+
+                        e.Graphics.FillRectangle(cellBrush, cellRect);
+                    }
+
+
+
+
+
+                    // Outline the cell with a pen
+                    e.Graphics.DrawRectangle(x10GridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                }
+            }
+
+
+
+
 
             // Cleaning up pens and brushes
             gridPen.Dispose();
