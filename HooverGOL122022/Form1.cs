@@ -47,7 +47,6 @@ namespace HooverGOL122022
             //clear the scratchPad
             ClearScratchpad();
 
-
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
@@ -63,11 +62,9 @@ namespace HooverGOL122022
                     }
                     else 
                          count = CountNeighborsFinite(x, y);
-                    
-                     
 
-                    
                     ////apply the rules and decide if cell should live or die in the next generation
+                    
                     ////rule 1
                     // Living cells with less than 2 living neighbors die in the next generation.
                     if (universe[x, y] == true && count < 2)
@@ -105,19 +102,12 @@ namespace HooverGOL122022
                     {
                         scratchpad[x, y] = universe[x, y];
                     }
-
-
                 } 
             }
-
-
             //copy from the scratch pad to universe
-
             bool[,] temp = new bool[10, 10];
             universe = scratchpad;
             scratchpad = temp;
-            
-
 
             // Increment generation count
             generations++;
@@ -140,9 +130,9 @@ namespace HooverGOL122022
         {
             // Calculate the width and height of each cell in pixels // you need to do this math as float, so we have to figure out how to make the division be done as float as well
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
-            float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
+            float cellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
-            float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
@@ -167,8 +157,13 @@ namespace HooverGOL122022
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
                     {
+                      
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
+                    
+                 
+                        
+      
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
@@ -191,10 +186,12 @@ namespace HooverGOL122022
                 int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
                 // Calculate the cell that was clicked in
-                // CELL X = MOUSE X / CELL WIDTH
+                // CELL X = MOUSE X /  CELL WIDTH
                 int x = e.X / cellWidth;
                 // CELL Y = MOUSE Y / CELL HEIGHT
                 int y = e.Y / cellHeight;
+
+
 
                 // Toggle the cell's state
                 universe[x, y] = !universe[x, y];
@@ -207,7 +204,7 @@ namespace HooverGOL122022
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)//close the program
         {
-            this.Close();
+            Close();
 
         }
 
@@ -233,22 +230,18 @@ namespace HooverGOL122022
 
         private int CountNeighborsFinite(int x, int y)
         {
+            //initiate the variables used
             int count = 0;
-
             int xLen = universe.GetLength(0);
-
             int yLen = universe.GetLength(1);
 
+            //nested for loop for the number of rows
             for (int yOffset = -1; yOffset <= 1; yOffset++)
-
             {
-
+                //nested forloop for the columns
                 for (int xOffset = -1; xOffset <= 1; xOffset++)
-
                 {
-
                     int xCheck = x + xOffset;
-
                     int yCheck = y + yOffset;
 
                     // if xOffset and yOffset are both equal to 0 then continue
@@ -276,7 +269,7 @@ namespace HooverGOL122022
                     {
                         continue;
                     }
-
+                    //default if nothing else is correct
                     else if (universe[xCheck, yCheck] == true) { count++; }
                 }
             }
@@ -285,22 +278,16 @@ namespace HooverGOL122022
 
         private int CountNeighborsToroidal(int x, int y)
         {
+            //initiate the variables used
             int count = 0;
-
             int xLen = universe.GetLength(0);
-
             int yLen = universe.GetLength(1);
 
             for (int yOffset = -1; yOffset <= 1; yOffset++)
-
             {
-
                 for (int xOffset = -1; xOffset <= 1; xOffset++)
-
                 {
-
                     int xCheck = x + xOffset;
-
                     int yCheck = y + yOffset;
 
                     // if xOffset and yOffset are both equal to 0 then continue
@@ -316,30 +303,26 @@ namespace HooverGOL122022
                     // if yCheck is less than 0 then set to yLen - 1
                     else if (yCheck < 0)
                     {
-                        yLen = universe.GetLength(-1);
+                        yLen = -1;
                     }
                     // if xCheck is greater than or equal too xLen then set to 0
                     else if (xCheck >= xLen)
                     {
-                        xLen = universe.GetLength(0);
+                        xLen = 0;
                     }
                     // if yCheck is greater than or equal too yLen then set to 0
                     else if (yCheck >= yLen)
                     {
-                        yLen = universe.GetLength(0);
+                        yLen = 0;
                     }
 
-
+                    //default if nothing else is correct
                     else if (universe[xCheck, yCheck] == true) { count++; }
-
                 }
-
             }
-
-
             return count;
-
         }
+
         public void ClearScratchpad()
         {
             for (int y = 0; y < scratchpad.GetLength(1); y++)
@@ -349,8 +332,7 @@ namespace HooverGOL122022
                 {
                     scratchpad[x, y] = false;
                 }
-            }
-            
+            }           
         }
         public void Clear()
         {
@@ -364,7 +346,8 @@ namespace HooverGOL122022
                 }
             }
             generations -= 1;
-            NextGeneration();
+            //NextGeneration();
+            graphicsPanel1.Invalidate();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -374,15 +357,13 @@ namespace HooverGOL122022
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)//new game
         {
-            this.generations = -1;
-            NextGeneration();
-            
-            this.Clear();
-            this.ClearScratchpad();
+            Clear();
+            generations = -1;         
             timer.Enabled = false;
+            NextGeneration();
+            graphicsPanel1.Invalidate();
 
-            
-            
+
         }
         private void RandomGame()
         {
@@ -405,13 +386,25 @@ namespace HooverGOL122022
 
         private void torodialToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //updates the torodial bool to true 
             toroidal= true;
 
         }
 
         private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //updates the torodial bool to default false
             toroidal= false;
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
