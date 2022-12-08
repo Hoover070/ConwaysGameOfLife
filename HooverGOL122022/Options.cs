@@ -16,5 +16,21 @@ namespace HooverGOL122022
         {
             InitializeComponent();
         }
+        public int TimerMiliseconds //this is a proper way to do a property
+        {
+            get { return (int)numericUpDownTimer.Value; }
+            set { numericUpDownTimer.Value = value; }
+        }
+
+        public int WidthUniverse
+        {
+            get { return (int)numericUpDownWidthOfUniverse.Value; }
+            set { numericUpDownWidthOfUniverse.Value = value; }
+        }
+        public int HeightUniverse
+        {
+            get { return (int)numericUpDownHeightofUniverse.Value; }
+            set { numericUpDownHeightofUniverse.Value = value; }
+        }
     }
 }

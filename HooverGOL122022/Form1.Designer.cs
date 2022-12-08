@@ -83,11 +83,11 @@ namespace HooverGOL122022
             this.hUDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cellColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graphicsPanel1 = new HooverGOL122022.GraphicsPanel();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridColorToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.x10GridColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cellColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.graphicsPanel1 = new HooverGOL122022.GraphicsPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -289,28 +289,28 @@ namespace HooverGOL122022
             // backColorToolStripMenuItem
             // 
             this.backColorToolStripMenuItem.Name = "backColorToolStripMenuItem";
-            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.backColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.backColorToolStripMenuItem.Text = "Back Color";
             this.backColorToolStripMenuItem.Click += new System.EventHandler(this.backColorToolStripMenuItem_Click);
             // 
             // gridColorToolStripMenuItem
             // 
             this.gridColorToolStripMenuItem.Name = "gridColorToolStripMenuItem";
-            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.gridColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.gridColorToolStripMenuItem.Text = "Grid Color";
             this.gridColorToolStripMenuItem.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
             // 
             // gridX10ColorToolStripMenuItem
             // 
             this.gridX10ColorToolStripMenuItem.Name = "gridX10ColorToolStripMenuItem";
-            this.gridX10ColorToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.gridX10ColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.gridX10ColorToolStripMenuItem.Text = "Grid x10 Color";
             this.gridX10ColorToolStripMenuItem.Click += new System.EventHandler(this.gridX10ColorToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(267, 6);
             // 
             // optionsToolStripMenuItem1
             // 
@@ -322,18 +322,18 @@ namespace HooverGOL122022
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(225, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(267, 6);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.reloadToolStripMenuItem.Text = "Reload";
             // 
             // toolStrip1
@@ -481,32 +481,56 @@ namespace HooverGOL122022
             this.x10GridColorToolStripMenuItem,
             this.cellColorToolStripMenuItem1});
             this.gridColorToolStripMenuItem1.Name = "gridColorToolStripMenuItem1";
-            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(240, 32);
+            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(178, 32);
             this.gridColorToolStripMenuItem1.Text = "Color";
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(237, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(175, 6);
             // 
             // hUDToolStripMenuItem
             // 
             this.hUDToolStripMenuItem.Name = "hUDToolStripMenuItem";
-            this.hUDToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.hUDToolStripMenuItem.Size = new System.Drawing.Size(178, 32);
             this.hUDToolStripMenuItem.Text = "HUD";
             // 
             // generationsToolStripMenuItem
             // 
             this.generationsToolStripMenuItem.Name = "generationsToolStripMenuItem";
-            this.generationsToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.generationsToolStripMenuItem.Size = new System.Drawing.Size(178, 32);
             this.generationsToolStripMenuItem.Text = "Generations";
             // 
             // cellColorToolStripMenuItem
             // 
             this.cellColorToolStripMenuItem.Name = "cellColorToolStripMenuItem";
-            this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.cellColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.cellColorToolStripMenuItem.Text = "Cell Color";
             this.cellColorToolStripMenuItem.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click_1);
+            // 
+            // backgroundColorToolStripMenuItem
+            // 
+            this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(257, 34);
+            this.backgroundColorToolStripMenuItem.Text = "Background Color";
+            // 
+            // gridColorToolStripMenuItem2
+            // 
+            this.gridColorToolStripMenuItem2.Name = "gridColorToolStripMenuItem2";
+            this.gridColorToolStripMenuItem2.Size = new System.Drawing.Size(257, 34);
+            this.gridColorToolStripMenuItem2.Text = "Grid Color";
+            // 
+            // x10GridColorToolStripMenuItem
+            // 
+            this.x10GridColorToolStripMenuItem.Name = "x10GridColorToolStripMenuItem";
+            this.x10GridColorToolStripMenuItem.Size = new System.Drawing.Size(257, 34);
+            this.x10GridColorToolStripMenuItem.Text = "x10 Grid Color";
+            // 
+            // cellColorToolStripMenuItem1
+            // 
+            this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
+            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(257, 34);
+            this.cellColorToolStripMenuItem1.Text = "Cell Color";
             // 
             // graphicsPanel1
             // 
@@ -520,30 +544,6 @@ namespace HooverGOL122022
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
-            // 
-            // backgroundColorToolStripMenuItem
-            // 
-            this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.backgroundColorToolStripMenuItem.Text = "Background Color";
-            // 
-            // gridColorToolStripMenuItem2
-            // 
-            this.gridColorToolStripMenuItem2.Name = "gridColorToolStripMenuItem2";
-            this.gridColorToolStripMenuItem2.Size = new System.Drawing.Size(270, 34);
-            this.gridColorToolStripMenuItem2.Text = "Grid Color";
-            // 
-            // x10GridColorToolStripMenuItem
-            // 
-            this.x10GridColorToolStripMenuItem.Name = "x10GridColorToolStripMenuItem";
-            this.x10GridColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.x10GridColorToolStripMenuItem.Text = "x10 Grid Color";
-            // 
-            // cellColorToolStripMenuItem1
-            // 
-            this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
-            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
-            this.cellColorToolStripMenuItem1.Text = "Cell Color";
             // 
             // Form1
             // 

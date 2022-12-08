@@ -56,12 +56,6 @@
     <Compile Include="GraphicsPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ModalDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ModalDialog.Designer.cs">
-      <DependentUpon>ModalDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,9 +66,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModalDialog.resx">
-      <DependentUpon>ModalDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Options.resx">
       <DependentUpon>Options.cs</DependentUpon>

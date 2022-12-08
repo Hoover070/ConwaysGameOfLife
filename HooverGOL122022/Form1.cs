@@ -549,8 +549,19 @@ namespace HooverGOL122022
 
         private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            ModalDialog dlg
+            
+            dlg.Number = number;
 
+            //to make a tool window
+            //dlg.Show(); needs an update button to send the information back
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                number = dlg.Number;
 
+                panel1.Invalidate();
+
+            }
 
         }
     }
