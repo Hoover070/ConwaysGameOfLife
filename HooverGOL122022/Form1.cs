@@ -30,7 +30,7 @@ namespace HooverGOL122022
         int generations = 0;
 
         //changeable count // default is false, which is finite. Once the option is clicked in the menu it changes. 
-       bool toroidal = true;
+       bool toroidal = false;
 
         //bool for the number in the center of the screen
         bool neighborCount = true;
@@ -109,7 +109,7 @@ namespace HooverGOL122022
                 } 
             }
             //copy from the scratch pad to universe
-            bool[,] temp = new bool[10, 10];
+            bool[,] temp = universe;
             universe = scratchpad;
             scratchpad = temp;
 
@@ -484,6 +484,11 @@ namespace HooverGOL122022
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabelGenerations_Click(object sender, EventArgs e)
         {
 
         }
