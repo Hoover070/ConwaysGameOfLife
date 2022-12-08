@@ -9,14 +9,15 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace HooverGOL122022
 {
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[30, 30];
-        bool[,] scratchpad = new bool[30, 30];
+        bool[,] universe = new bool[10, 10];
+        bool[,] scratchpad = new bool[10, 10];
 
         // Drawing colors - changing cell colors
         Color gridColor = Color.Black;
@@ -29,7 +30,10 @@ namespace HooverGOL122022
         int generations = 0;
 
         //changeable count // default is false, which is finite. Once the option is clicked in the menu it changes. 
-       bool toroidal = false;
+       bool toroidal = true;
+
+        //bool for the number in the center of the screen
+        bool neighborCount = true;
 
         public Form1()
         {
@@ -143,7 +147,12 @@ namespace HooverGOL122022
             Pen x10GridPen = new Pen(gridColor, 3);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
-            
+            //font for the neighborsCount
+            Font font = new Font("Arial", 10f);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
+
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -164,13 +173,42 @@ namespace HooverGOL122022
                       
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
-                    
-                 
-                        
-      
-
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+
+                    if (neighborCount == true)
+                    {
+                        
+                        int neighbors = CountNeighborsFinite(x, y);
+                        if (neighbors == 0)
+                        {
+                            continue;
+                        }
+                        else if (universe[x,y] == true && neighbors < 2)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
+                        }
+                        else if(universe[x, y] == true && neighbors > 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
+                        }
+                        else if (universe[x, y] == true && neighbors == 2 || neighbors == 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
+                        }
+                        else if (universe[x, y] == false && neighbors == 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
+                        }
+
+                          
+
+
+                    }
                 }
             }
             //for the x10 grid
@@ -194,6 +232,7 @@ namespace HooverGOL122022
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
 
+                    
 
 
 
@@ -203,6 +242,7 @@ namespace HooverGOL122022
                 }
             }
 
+            
 
 
 
