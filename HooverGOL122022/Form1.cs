@@ -48,8 +48,7 @@ namespace HooverGOL122022
         // Calculate the next generation of cells
         private void NextGeneration() //to boldly go where no one has gone before
         {
-            //clear the scratchPad
-            //ClearScratchpad();
+            
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -236,20 +235,10 @@ namespace HooverGOL122022
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
 
-                    
-
-
-
-
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(x10GridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
-
-            
-
-
-
 
             // Cleaning up pens and brushes
             gridPen.Dispose();
@@ -431,7 +420,7 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
         }
 
-        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)//clears the board but does not start a new game
         {
             Clear();
         }

@@ -242,8 +242,8 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAABkSURBVDhPYxh4oKio+ACI/5OJH4AM+C8nJydJDgbppZ0B
-        jFGbd/G61Ftgk4NhvAYwxO76zxC0/jtj+OoecX13BWxqCBsAwzHbH7AGzo1DV0MHAyjxAsWBSAymmgGU
-        JeUBBgwMADwLoa9b9Ze9AAAAAElFTkSuQmCC
+        jFGbd/G61Ftgk4NhvAYwxO76zxCw/jtj+OoecX13BWxqCBsAwzHbH7AGzo1DV0MHAyjxAsWBSAymmgGU
+        JeUBBgwMADPhoas+l9RKAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -265,5 +265,8 @@
   </data>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>182, 18</value>
+  </metadata>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>495, 16</value>
   </metadata>
 </root>
