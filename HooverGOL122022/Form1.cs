@@ -546,6 +546,13 @@ namespace HooverGOL122022
                 graphicsPanel1.Invalidate();
             }
         }
+
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+
+
+        }
     }
 }
 
