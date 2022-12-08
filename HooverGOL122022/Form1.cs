@@ -22,6 +22,7 @@ namespace HooverGOL122022
         // Drawing colors - changing cell colors
         Color gridColor = Color.Black;
         Color cellColor = Color.Gray;
+        Color x10GridColor = Color.Black;
 
         // The Timer class
         Timer timer = new Timer();
@@ -143,7 +144,7 @@ namespace HooverGOL122022
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
-            Pen x10GridPen = new Pen(gridColor, 3);
+            Pen x10GridPen = new Pen(x10GridColor, 3);
             // A Brush for filling living cells interiors (color)
             Brush cellBrush = new SolidBrush(cellColor);
             //font for the neighborsCount
@@ -480,6 +481,70 @@ namespace HooverGOL122022
         private void toolStripStatusLabelGenerations_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = graphicsPanel1.BackColor;
+
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.BackColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+
+        }
+
+        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //ColorDialog dlg = new ColorDialog();
+
+            //dlg.ShowDialog();
+
+        }
+
+        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = gridColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void gridX10ColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = x10GridColor;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                x10GridColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void cellColorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+
+            dlg.Color = cellColor;
+
+            
+
+            if(DialogResult.OK == dlg.ShowDialog())
+            { 
+                cellColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
         }
     }
 }
