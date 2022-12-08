@@ -176,37 +176,41 @@ namespace HooverGOL122022
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
 
+                    //activates the show neighbor count, and change the color of the neighbor count on wether or not the cell will live next generation
                     if (neighborCount == true)
                     {
-                        
+                        //initiate neighbors count
                         int neighbors = CountNeighborsFinite(x, y);
+                        //if 0 do not show anything 
                         if (neighbors == 0)
                         {
                             continue;
                         }
+                        //show red because next generataion it will die next generation
                         else if (universe[x,y] == true && neighbors < 2)
                         {
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
                         }
-                        else if(universe[x, y] == true && neighbors > 3)
+                        // //show red because next generataion it will die next generation
+                        else if (universe[x, y] == true && neighbors > 3)
                         {
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
                         }
+                        //show red because next generataion it will live next generation
                         else if (universe[x, y] == true && neighbors == 2 || neighbors == 3)
                         {
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
                         }
+                        //show red because next generataion it will live next generation
                         else if (universe[x, y] == false && neighbors == 3)
                         {
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
                         }
+                        //nothing will happen to the cell next geneartion
                         else
                         {
                             e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
                         }
-
-                          
-
 
                     }
                 }
