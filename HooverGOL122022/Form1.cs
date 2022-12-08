@@ -49,7 +49,7 @@ namespace HooverGOL122022
         private void NextGeneration() //to boldly go where no one has gone before
         {
             //clear the scratchPad
-            ClearScratchpad();
+            //ClearScratchpad();
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
