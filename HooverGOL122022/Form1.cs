@@ -17,8 +17,8 @@ namespace HooverGOL122022
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[20, 10];
-        bool[,] scratchpad = new bool[20, 10];
+        bool[,] universe = new bool[10, 10];
+        bool[,] scratchpad = new bool[10, 10];
 
         // Drawing colors - changing cell colors
         Color gridColor;
@@ -367,7 +367,7 @@ namespace HooverGOL122022
             return count;
         }
 
-        private int CountNeighborsToroidal(int x, int y)
+        private int CountNeighborsToroidal(int x, int y) //does not currently work
         {
             //initiate the variables used
             int count = 0;
@@ -586,7 +586,7 @@ namespace HooverGOL122022
             {
                 timer.Interval = (int)dlg.TimerMiliseconds;
                 universe = ResizeUniverse<bool>(universe, dlg.WidthUniverse, dlg.HeightUniverse) ;
-
+                scratchpad = ResizeUniverse<bool>(scratchpad, dlg.WidthUniverse, dlg.HeightUniverse);
                 graphicsPanel1.Invalidate();
 
             }
@@ -601,12 +601,12 @@ namespace HooverGOL122022
             //instatiate resizearray
             var resizeUniverse = new bool[rows, columns];
 
-            for (int y = 0; y < original.GetLength(0); y++)
+            for (int y = 0; y <= 0; y++)
             {
-                for (int x = 0; x < original.GetLength(1); x++)
+                for (int x = 1; x <= 1; x++)
                 {
 
-                    resizeUniverse[y, x] = original[y, x];
+                    original[y, x]= resizeUniverse[y, x];
 
 
                 }
@@ -646,6 +646,42 @@ namespace HooverGOL122022
             //saving the updates
             Properties.Settings.Default.Save();
 
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e) //loads the default settings
+        {
+            Properties.Settings.Default.Reset();
+            //loading in settings for the color
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            x10GridColor = Properties.Settings.Default.x10GridColor;
+            cellColor = Properties.Settings.Default.CellColor;
+
+            //loading in settings for the grid
+            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            toroidal = Properties.Settings.Default.Finite;
+            gridOn = Properties.Settings.Default.GridOn;
+            timer.Interval = Properties.Settings.Default.Miliseconds;
+            graphicsPanel1.Invalidate();
+        }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e) //loads the last saved settings
+        {
+            Properties.Settings.Default.Reload();
+            //loading in settings for the color
+            graphicsPanel1.BackColor = Properties.Settings.Default.BackColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            x10GridColor = Properties.Settings.Default.x10GridColor;
+            cellColor = Properties.Settings.Default.CellColor;
+
+            //loading in settings for the grid
+            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            toroidal = Properties.Settings.Default.Finite;
+            gridOn = Properties.Settings.Default.GridOn;
+            timer.Interval = Properties.Settings.Default.Miliseconds;
+            graphicsPanel1.Invalidate();
         }
     }
 }
