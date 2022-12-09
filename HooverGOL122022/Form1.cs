@@ -56,10 +56,11 @@ namespace HooverGOL122022
             cellColor = Properties.Settings.Default.CellColor;
 
             //loading in settings for the grid
-            ResizeUniverse<bool>(universe,Properties.Settings.Default.UniverseX, Properties.Settings.Default.UniverseY);
-            gridColor = Properties.Settings.Default.GridColor;
-            x10GridColor = Properties.Settings.Default.x10GridColor;
-            cellColor= Properties.Settings.Default.CellColor;
+            universe = ResizeUniverse<bool>(universe,Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(scratchpad,Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            toroidal = Properties.Settings.Default.Finite;
+            gridOn= Properties.Settings.Default.GridOn;
+            timer.Interval = Properties.Settings.Default.Miliseconds;
 
         }
 
@@ -620,6 +621,27 @@ namespace HooverGOL122022
             Properties.Settings.Default.GridColor = gridColor;
             Properties.Settings.Default.x10GridColor = x10GridColor;
             Properties.Settings.Default.CellColor = cellColor;
+
+            //updating the settings for the grid
+            for (int y = 0; y < 1; y++)
+            {
+                for (int x = 0; x < 1; x++)
+                {
+
+                    Properties.Settings.Default.UniverseX = universe.GetLength(1);
+                    Properties.Settings.Default.UniverseY = universe.GetLength(0);
+
+
+                }
+            }
+            
+            Properties.Settings.Default.Finite = toroidal;
+            Properties.Settings.Default.GridOn = gridOn;
+            Properties.Settings.Default.Miliseconds = timer.Interval;
+
+
+
+
 
             //saving the updates
             Properties.Settings.Default.Save();
