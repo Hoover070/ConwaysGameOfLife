@@ -71,13 +71,24 @@
             // numericUpDownTimer
             // 
             this.numericUpDownTimer.Location = new System.Drawing.Point(381, 81);
+            this.numericUpDownTimer.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDownTimer.Name = "numericUpDownTimer";
             this.numericUpDownTimer.Size = new System.Drawing.Size(120, 26);
             this.numericUpDownTimer.TabIndex = 3;
+            this.numericUpDownTimer.ValueChanged += new System.EventHandler(this.numericUpDownTimer_ValueChanged);
             // 
             // numericUpDownWidthOfUniverse
             // 
             this.numericUpDownWidthOfUniverse.Location = new System.Drawing.Point(381, 149);
+            this.numericUpDownWidthOfUniverse.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDownWidthOfUniverse.Name = "numericUpDownWidthOfUniverse";
             this.numericUpDownWidthOfUniverse.Size = new System.Drawing.Size(120, 26);
             this.numericUpDownWidthOfUniverse.TabIndex = 4;
@@ -85,6 +96,11 @@
             // numericUpDownHeightofUniverse
             // 
             this.numericUpDownHeightofUniverse.Location = new System.Drawing.Point(381, 220);
+            this.numericUpDownHeightofUniverse.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.numericUpDownHeightofUniverse.Name = "numericUpDownHeightofUniverse";
             this.numericUpDownHeightofUniverse.Size = new System.Drawing.Size(120, 26);
             this.numericUpDownHeightofUniverse.TabIndex = 5;

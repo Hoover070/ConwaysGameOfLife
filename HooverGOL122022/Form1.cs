@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace HooverGOL122022
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[10, 10];
-        bool[,] scratchpad = new bool[10, 10];
+        bool[,] universe = new bool[20, 10];
+        bool[,] scratchpad = new bool[20, 10];
 
         // Drawing colors - changing cell colors
         Color gridColor = Color.Black;
@@ -549,20 +550,47 @@ namespace HooverGOL122022
 
         private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ModalDialog dlg
-            
-            dlg.Number = number;
+            int width = (int)universe.GetLength(0);
+            int height = (int)universe.GetLength(1);
+
+            Options dlg = new Options();
+
+            dlg.TimerMiliseconds = timer.Interval;
+            dlg.WidthUniverse = width;
+            dlg.HeightUniverse = height;
+
+
 
             //to make a tool window
             //dlg.Show(); needs an update button to send the information back
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                number = dlg.Number;
+                timer.Interval = (int)dlg.TimerMiliseconds;
+                universe = ResizeArray<bool>(universe, dlg.WidthUniverse, dlg.HeightUniverse) ;
 
-                panel1.Invalidate();
+                graphicsPanel1.Invalidate();
 
             }
 
+        }
+
+
+        bool[,] ResizeArray<T>(bool[,] original,  int rows, int columns)
+        {
+            var resizeArray = new bool[rows, columns];
+            int rowsMin = Math.Min(rows, original.GetLength(0));
+            int columnsMin = Math.Min(columns, original.GetLength(1));
+            for (int i = 0; i < rowsMin; i++)
+            {
+                for (int j = 0; j < columnsMin; j++)
+                {
+                    resizeArray[i, j] = original[i, j];
+
+
+
+                }
+            }
+            return resizeArray;
         }
     }
 }

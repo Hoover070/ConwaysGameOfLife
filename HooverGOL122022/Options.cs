@@ -32,5 +32,10 @@ namespace HooverGOL122022
             get { return (int)numericUpDownHeightofUniverse.Value; }
             set { numericUpDownHeightofUniverse.Value = value; }
         }
+
+        private void numericUpDownTimer_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
