@@ -176,12 +176,38 @@ namespace HooverGOL122022
                 stringFormat.Alignment = StringAlignment.Center;
                 stringFormat.LineAlignment = StringAlignment.Center;
 
+                //for the x10 grid
+                for (int y = 0; y < universe.GetLength(1) / 10; y++)
+                {
+                    // Iterate through the universe in the x, left to right
+                    for (int x = 0; x < universe.GetLength(0) / 10; x++)
+                    {
+                        // A rectangle to represent each cell in pixels
+                        //RectangleF - This is the float rectangle 
+                        RectangleF cellRectx10 = RectangleF.Empty;
+                        cellRectx10.X = x * x10CellWidth;
+                        cellRectx10.Y = y * x10CellHeight;
+                        cellRectx10.Width = x10CellWidth;
+                        cellRectx10.Height = x10CellHeight;
+
+                       
+
+                        // Outline the cell with a pen
+                        e.Graphics.DrawRectangle(x10GridPen, cellRectx10.X, cellRectx10.Y, cellRectx10.Width, cellRectx10.Height);
+                    }
+                }
+
                 // Iterate through the universe in the y, top to bottom
                 for (int y = 0; y < universe.GetLength(1); y++)
                 {
                     // Iterate through the universe in the x, left to right
                     for (int x = 0; x < universe.GetLength(0); x++)
                     {
+                      
+                        
+
+
+
                         // A rectangle to represent each cell in pixels
                         //RectangleF - This is the float rectangle 
                         RectangleF cellRect = RectangleF.Empty;
@@ -238,31 +264,7 @@ namespace HooverGOL122022
                         }
                     }
                 }
-                //for the x10 grid
-                for (int y = 0; y < universe.GetLength(1) / 10; y++)
-                {
-                    // Iterate through the universe in the x, left to right
-                    for (int x = 0; x < universe.GetLength(0) / 10; x++)
-                    {
-                        // A rectangle to represent each cell in pixels
-                        //RectangleF - This is the float rectangle 
-                        RectangleF cellRect = RectangleF.Empty;
-                        cellRect.X = x * x10CellWidth;
-                        cellRect.Y = y * x10CellHeight;
-                        cellRect.Width = x10CellWidth;
-                        cellRect.Height = x10CellHeight;
-
-                        // Fill the cell with a brush if alive
-                        if (universe[x, y] == true)
-                        {
-
-                            e.Graphics.FillRectangle(cellBrush, cellRect);
-                        }
-
-                        // Outline the cell with a pen
-                        e.Graphics.DrawRectangle(x10GridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
-                    }
-                }
+                
 
                 // Cleaning up pens and brushes
                 gridPen.Dispose();
