@@ -96,8 +96,7 @@ namespace HooverGOL122022
                     else 
                          count = CountNeighborsFinite(x, y);
 
-                    ////apply the rules and decide if cell should live or die in the next generation
-                    
+                    ////apply the rules and decide if cell should live or die in the next generation                    
                     ////rule 1
                     // Living cells with less than 2 living neighbors die in the next generation.
                     if (universe[x, y] == true && count < 2)
@@ -105,8 +104,6 @@ namespace HooverGOL122022
                         scratchpad[x, y] = false;
 
                     }
-
-
                     //rule 2
                     // Living cells with more than 3 living neighbors die in the next generation.
                     else if (universe[x, y] == true && count > 3)
@@ -114,8 +111,6 @@ namespace HooverGOL122022
                         scratchpad[x, y] = false;
 
                     }
-
-
                     //rule 3
                     //Living cells with 2 or 3 living neighbors live in the next generation.
                     else if (universe[x, y] == true && count == 2 || count == 3)
@@ -123,8 +118,6 @@ namespace HooverGOL122022
                         scratchpad[x, y] = true;
 
                     }
-
-
                     //rule 4
                     //Dead cells with exactly 3 living neighbors live in the next generation.
                     else if (universe[x, y] == false && count == 3)
@@ -472,7 +465,7 @@ namespace HooverGOL122022
            
             // Cycle cells using rand to set live/dead cells
             Random rand = new Random();
-            Random randSeed = new Random(seed);
+           
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -481,18 +474,20 @@ namespace HooverGOL122022
                 {
 
                     // Random Board
-                    if (rand.Next() == 0)
+                    if (rand.Next(0,2) == 0)
                     { 
                         universe[x, y] = true;
                     }
                     else
-                    {
                         universe[x, y] = false;
-                    }
+
 
                     
+
                 }
             }
+            graphicsPanel1.Invalidate();
+
         }
         private void RandomGameSeed()
         {
@@ -507,7 +502,7 @@ namespace HooverGOL122022
                 {
 
                     // Random Board
-                    if (randSeed.Next() == 0)
+                    if (randSeed.Next(0,2)==0)
                     {
                         universe[x, y] = true;
                     }
@@ -519,6 +514,7 @@ namespace HooverGOL122022
 
                 }
             }
+            graphicsPanel1.Invalidate();
         }
 
         private void torodialToolStripMenuItem_Click(object sender, EventArgs e)
@@ -738,17 +734,23 @@ namespace HooverGOL122022
 
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            RandomSeed dlg = new RandomSeed();
+           
+
+            dlg.Seed = seed;
 
 
 
-            RandomGameSeed();
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                seed = dlg.Seed;
+                RandomGameSeed();
+            }
         }
 
         private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
-
+            seed = Properties.Settings.Default.Seed;
             RandomGameSeed();
         }
 
