@@ -775,11 +775,11 @@ namespace HooverGOL122022
                 StreamWriter writer = new StreamWriter(dlg.FileName);
 
                 //to check to see if the file exists
-                if (!File.Exists(dlg.FileName))
-                {
-                    // Create a file to write to.
-                    using (StreamWriter sw = File.CreateText(dlg.FileName))
-                    {
+                //if (!File.Exists(dlg.FileName))
+                //{
+                //    // Create a file to write to.
+                //    using (StreamWriter sw = File.CreateText(dlg.FileName))
+                //    {
 
 
                         // Write any comments you want to include first.
@@ -789,45 +789,45 @@ namespace HooverGOL122022
                         writer.WriteLine("!date");
 
                         // Iterate through the universe one row at a time.
-                        for (int y = 0; y < 1; y++)
+                        for (int y = 0; y < universe.GetLength(1); y++)
                         {
                             // Create a string to represent the current row.
                             String currentRow = string.Empty;
                             // Iterate through the current row one cell at a time.
-                            for (int x = 0; x < 1; x++)
+                            for (int x = 0; x < universe.GetLength(0); x++)
                             {
                                 // If the universe[x,y] is alive then append 'O' (capital O)
                                 // to the row string.
                                 if (universe[x, y] == true)
                                 {
-                                    using (StreamWriter swa = File.AppendText(currentRow))
-                                    {
-                                        sw.WriteLine("O");
 
-                                    }
+                                     currentRow.Append < char >('O');
+
+
+
                                 }
 
                                 // Else if the universe[x,y] is dead then append '.' (period)
                                 // to the row string.
                                 else
                                 {
-                                    using (StreamWriter swa = File.AppendText(currentRow))
-                                    {
-                                        sw.WriteLine(".");
+                                    currentRow.Append<char>('O');
 
-                                    }
                                 }
                             }
 
                             // Once the current row has been read through and the 
                             // string constructed then write it to the file using WriteLine.
+                            writer.Write(currentRow.ToString());
 
                         }
 
                         // After all rows and columns have been written then close the file.
                         writer.Close();
-                    }
-                }
+                        
+                           
+                    //}
+                //}
 
 
 
