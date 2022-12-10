@@ -32,13 +32,21 @@ namespace HooverGOL122022
         int generations = 0;
 
         //changeable count // default is false, which is finite. Once the option is clicked in the menu it changes. 
-        bool toroidal = false;
-
+        public bool toroidal = false;
+        //public bool GetToroidal
+        //{
+        //   get{ return toroidal; }
+        //   set { toroidal = value; }
+        //}
         //bool for the number in the center of the screen
         bool neighborCount = true;
 
         //bool to turn the grid on or off
         bool gridOn = true;
+
+        //int for the random seed
+        int seed = 1405029;
+
 
         public Form1()
         {
@@ -61,6 +69,9 @@ namespace HooverGOL122022
             toroidal = Properties.Settings.Default.Finite;
             gridOn= Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
+
+            //loading random seed
+            seed = Properties.Settings.Default.Seed;
 
         }
 
@@ -456,21 +467,56 @@ namespace HooverGOL122022
 
 
         }
-        private void RandomGame()
+        private void RandomGameTime()
         {
            
             // Cycle cells using rand to set live/dead cells
-            var rand = new Random();
+            Random rand = new Random();
+            Random randSeed = new Random(seed);
+
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
+
                     // Random Board
-                    if (rand.Next(1, 101) < 75)
-                        universe[x, y] = false;
-                    else
+                    if (rand.Next() == 0)
+                    { 
                         universe[x, y] = true;
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
+                    }
+
+                    
+                }
+            }
+        }
+        private void RandomGameSeed()
+        {
+
+            // Cycle cells using rand to set live/dead cells
+           Random randSeed = new Random(seed);
+
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+
+                    // Random Board
+                    if (randSeed.Next() == 0)
+                    {
+                        universe[x, y] = true;
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
+                    }
+
+
                 }
             }
         }
@@ -606,7 +652,7 @@ namespace HooverGOL122022
                 for (int x = 1; x <= 1; x++)
                 {
 
-                    original[y, x]= resizeUniverse[y, x];
+                     resizeUniverse[y, x] = original[y, x];
 
 
                 }
@@ -638,7 +684,7 @@ namespace HooverGOL122022
             Properties.Settings.Default.Finite = toroidal;
             Properties.Settings.Default.GridOn = gridOn;
             Properties.Settings.Default.Miliseconds = timer.Interval;
-
+            Properties.Settings.Default.Seed = seed;
 
 
 
@@ -682,6 +728,33 @@ namespace HooverGOL122022
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
             graphicsPanel1.Invalidate();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            toroidal = true;
+            
+        }
+
+        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+
+            RandomGameSeed();
+        }
+
+        private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+
+
+            RandomGameSeed();
+        }
+
+        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RandomGameTime();
         }
     }
 }

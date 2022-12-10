@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,9 +34,25 @@ namespace HooverGOL122022
             set { numericUpDownHeightofUniverse.Value = value; }
         }
 
+       
+
         private void numericUpDownTimer_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked) 
+            {
+                
+
+            }
         }
     }
 }
