@@ -926,6 +926,7 @@ namespace HooverGOL122022
                 // to the width and height of the file calculated above.
                 universe = new bool[maxWidth, maxHeight];
                 scratchpad = new bool[maxWidth, maxHeight];
+
                 // Reset the file pointer back to the beginning of the file.
                 reader.BaseStream.Seek(0, SeekOrigin.Begin);
 
@@ -949,20 +950,23 @@ namespace HooverGOL122022
                         // set the corresponding cell in the universe to alive.
                         if (row[xPos]=='O')
                         {
-                            universe[yPos,xPos] = true;
+                            universe[xPos, yPos] = true;
                         }
                         // If row[xPos] is a '.' (period) then
                         // set the corresponding cell in the universe to dead.
                         else if (row[xPos] == '.')
                         {
-                            universe[yPos, xPos] = false;
+                            universe[ xPos, yPos] = false;
                         }
+                        
                     }
+                    yPos++;
                 }
-
-
+               
+                
                 // Close the file.
                 reader.Close();
+                graphicsPanel1.Invalidate();
             }
         }
     }
