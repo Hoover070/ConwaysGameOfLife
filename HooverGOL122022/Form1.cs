@@ -50,7 +50,7 @@ namespace HooverGOL122022
 
         bool HudVisible = true;
 
-        
+
 
 
         public Form1()
@@ -69,10 +69,10 @@ namespace HooverGOL122022
             cellColor = Properties.Settings.Default.CellColor;
 
             //loading in settings for the grid
-            universe = ResizeUniverse<bool>(universe,Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
-            scratchpad = ResizeUniverse<bool>(scratchpad,Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
             toroidal = Properties.Settings.Default.Finite;
-            gridOn= Properties.Settings.Default.GridOn;
+            gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
 
             //loading random seed
@@ -83,7 +83,7 @@ namespace HooverGOL122022
         // Calculate the next generation of cells
         private void NextGeneration() //to boldly go where no one has gone before
         {
-            
+
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -94,12 +94,12 @@ namespace HooverGOL122022
                     //ClearScratchpad();
                     int count;
                     //get the neighbor count 
-                    if(toroidal == true)
+                    if (toroidal == true)
                     {
-                         count = CountNeighborsToroidal(x, y); 
+                        count = CountNeighborsToroidal(x, y);
                     }
-                    else 
-                         count = CountNeighborsFinite(x, y);
+                    else
+                        count = CountNeighborsFinite(x, y);
 
                     ////apply the rules and decide if cell should live or die in the next generation                    
                     ////rule 1
@@ -133,7 +133,7 @@ namespace HooverGOL122022
                     {
                         scratchpad[x, y] = universe[x, y];
                     }
-                } 
+                }
             }
             //copy from the scratch pad to universe
             bool[,] temp = universe;
@@ -174,114 +174,96 @@ namespace HooverGOL122022
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
             float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
             // x10 cell width
-            float x10CellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0)*10;
+            float x10CellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0) * 10;
             // x10 cell height
-            float x10CellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1)*10;
-            if (gridOn == true)
-            {
+            float x10CellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1) * 10;
+            
                 // A Pen for drawing the grid lines (color, width)
                 Pen gridPen = new Pen(gridColor, 1);
                 Pen x10GridPen = new Pen(x10GridColor, 3);
-                // A Brush for filling living cells interiors (color)
-                Brush cellBrush = new SolidBrush(cellColor);
-                //font for the neighborsCount
-                Font font = new Font("Arial", 10f);
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Center;
-                stringFormat.LineAlignment = StringAlignment.Center;
+            
+            // A Brush for filling living cells interiors (color)
+            Brush cellBrush = new SolidBrush(cellColor);
+            //font for the neighborsCount
+            Font font = new Font("Arial", 10f);
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+            stringFormat.LineAlignment = StringAlignment.Center;
 
-                //for the x10 grid
-                for (int y = 0; y < universe.GetLength(1) / 10; y++)
+
+            //regular grid code
+            // Iterate through the universe in the y, top to bottom
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    // Iterate through the universe in the x, left to right
-                    for (int x = 0; x < universe.GetLength(0) / 10; x++)
+
+                    // A rectangle to represent each cell in pixels
+                    //RectangleF - This is the float rectangle 
+                    RectangleF cellRect = RectangleF.Empty;
+                    cellRect.X = x * cellWidth;
+                    cellRect.Y = y * cellHeight;
+                    cellRect.Width = cellWidth;
+                    cellRect.Height = cellHeight;
+
+                    // Fill the cell with a brush if alive
+                    if (universe[x, y] == true)
                     {
-                        // A rectangle to represent each cell in pixels
-                        //RectangleF - This is the float rectangle 
-                        RectangleF cellRectx10 = RectangleF.Empty;
-                        cellRectx10.X = x * x10CellWidth;
-                        cellRectx10.Y = y * x10CellHeight;
-                        cellRectx10.Width = x10CellWidth;
-                        cellRectx10.Height = x10CellHeight;
 
-                       
-
-                        // Outline the cell with a pen
-                        e.Graphics.DrawRectangle(x10GridPen, cellRectx10.X, cellRectx10.Y, cellRectx10.Width, cellRectx10.Height);
+                        e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
-                }
 
-                // Iterate through the universe in the y, top to bottom
-                for (int y = 0; y < universe.GetLength(1); y++)
-                {
-                    // Iterate through the universe in the x, left to right
-                    for (int x = 0; x < universe.GetLength(0); x++)
+                    if(gridOn)
                     {
-                      
-                        
-
-
-
-                        // A rectangle to represent each cell in pixels
-                        //RectangleF - This is the float rectangle 
-                        RectangleF cellRect = RectangleF.Empty;
-                        cellRect.X = x * cellWidth;
-                        cellRect.Y = y * cellHeight;
-                        cellRect.Width = cellWidth;
-                        cellRect.Height = cellHeight;
-
-                        // Fill the cell with a brush if alive
-                        if (universe[x, y] == true)
-                        {
-
-                            e.Graphics.FillRectangle(cellBrush, cellRect);
-                        }
                         // Outline the cell with a pen
                         e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
+                    }
+                  
 
-                        //activates the show neighbor count, and change the color of the neighbor count on wether or not the cell will live next generation
-                        if (neighborCount == true)
+                    //activates the show neighbor count, and change the color of the neighbor count on wether or not the cell will live next generation
+                    if (neighborCount == true)
+                    {
+                        //initiate neighbors count
+                        int neighbors = CountNeighborsFinite(x, y);
+                        //if 0 do not show anything 
+                        if (neighbors == 0)
                         {
-                            //initiate neighbors count
-                            int neighbors = CountNeighborsFinite(x, y);
-                            //if 0 do not show anything 
-                            if (neighbors == 0)
-                            {
-                                continue;
-                            }
-                            //show red because next generataion it will die next generation
-                            else if (universe[x, y] == true && neighbors < 2)
-                            {
-                                e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
-                            }
-                            // //show red because next generataion it will die next generation
-                            else if (universe[x, y] == true && neighbors > 3)
-                            {
-                                e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
-                            }
-                            //show red because next generataion it will live next generation
-                            else if (universe[x, y] == true && neighbors == 2 || neighbors == 3)
-                            {
-                                e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
-                            }
-                            //show red because next generataion it will live next generation
-                            else if (universe[x, y] == false && neighbors == 3)
-                            {
-                                e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
-                            }
-                            //nothing will happen to the cell next geneartion
-                            else
-                            {
-                                e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
-                            }
-
+                            continue;
+                        }
+                        //show red because next generataion it will die next generation
+                        else if (universe[x, y] == true && neighbors < 2)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
+                        }
+                        // //show red because next generataion it will die next generation
+                        else if (universe[x, y] == true && neighbors > 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Red, cellRect, stringFormat);
+                        }
+                        //show red because next generataion it will live next generation
+                        else if (universe[x, y] == true && neighbors == 2 || neighbors == 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
+                        }
+                        //show red because next generataion it will live next generation
+                        else if (universe[x, y] == false && neighbors == 3)
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Green, cellRect, stringFormat);
+                        }
+                        //nothing will happen to the cell next geneartion
+                        else
+                        {
+                            e.Graphics.DrawString(neighbors.ToString(), font, Brushes.Black, cellRect, stringFormat);
                         }
                     }
                 }
+
+            }
 
 
                 //Draw Hud
-                if(HudVisible == true)
+                if (HudVisible == true)
                 {
                     Font font1 = new Font("Arial", 15f);
 
@@ -290,7 +272,7 @@ namespace HooverGOL122022
                     stringFormatHud.LineAlignment = StringAlignment.Far;
 
                     string boundry = "Finite";
-                    if(toroidal == true)
+                    if (toroidal == true)
                     {
                         boundry = "Toroidal";
                     }
@@ -301,12 +283,15 @@ namespace HooverGOL122022
 
                     e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
                 }
+            
 
-                // Cleaning up pens and brushes
-                gridPen.Dispose();
-                cellBrush.Dispose();
-            }
+
+
+            // Cleaning up pens and brushes
+            gridPen.Dispose();
+            cellBrush.Dispose();
         }
+        
 
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
