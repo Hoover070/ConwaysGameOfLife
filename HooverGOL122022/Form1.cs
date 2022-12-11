@@ -33,12 +33,8 @@ namespace HooverGOL122022
         int generations = 0;
 
         //changeable count // default is false, which is finite. Once the option is clicked in the menu it changes. 
-        public bool toroidal = false;
-        //public bool GetToroidal
-        //{
-        //   get{ return toroidal; }
-        //   set { toroidal = value; }
-        //}
+        bool toroidal = false;
+       
         //bool for the number in the center of the screen
         bool neighborCount = true;
 
@@ -50,6 +46,8 @@ namespace HooverGOL122022
 
         bool HudVisible = true;
 
+        //string for boundry 
+        string boundry = string.Empty;
 
 
 
@@ -74,17 +72,18 @@ namespace HooverGOL122022
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
+           
 
             //loading random seed
             seed = Properties.Settings.Default.Seed;
+
+           
 
         }
 
         // Calculate the next generation of cells
         private void NextGeneration() //to boldly go where no one has gone before
         {
-
-
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 // Iterate through the universe in the x, left to right
@@ -194,7 +193,7 @@ namespace HooverGOL122022
             //regular grid code
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
-            {
+                {
                 // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
@@ -224,8 +223,11 @@ namespace HooverGOL122022
                     //activates the show neighbor count, and change the color of the neighbor count on wether or not the cell will live next generation
                     if (neighborCount == true)
                     {
+                        int neighbors;
                         //initiate neighbors count
-                        int neighbors = CountNeighborsFinite(x, y);
+                        if (toroidal == true)
+                        {  neighbors = CountNeighborsToroidal(x, y); }
+                         neighbors = CountNeighborsFinite(x, y);
                         //if 0 do not show anything 
                         if (neighbors == 0)
                         {
@@ -260,29 +262,50 @@ namespace HooverGOL122022
                 }
 
             }
+            //end regular grid code
 
 
-                //Draw Hud
-                if (HudVisible == true)
+            //x10 grid code
+            //for the x10 grid
+            for (int y = 0; y < universe.GetLength(1) / 10; y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0) / 10; x++)
                 {
-                    Font font1 = new Font("Arial", 15f);
-
-                    StringFormat stringFormatHud = new StringFormat();
-                    stringFormatHud.Alignment = StringAlignment.Near;
-                    stringFormatHud.LineAlignment = StringAlignment.Far;
-
-                    string boundry = "Finite";
-                    if (toroidal == true)
-                    {
-                        boundry = "Toroidal";
-                    }
+                    // A rectangle to represent each cell in pixels
+                    //RectangleF - This is the float rectangle 
+                    RectangleF cellRectx10 = RectangleF.Empty;
+                    cellRectx10.X = x * x10CellWidth;
+                    cellRectx10.Y = y * x10CellHeight;
+                    cellRectx10.Width = x10CellWidth;
+                    cellRectx10.Height = x10CellHeight;
 
 
-                    Rectangle rect = graphicsPanel1.ClientRectangle;
-                    string hud = $"Generations: {generations}\nCell Count: {CountAlive()}\nBoundry Type: {boundry}\nUniverse Size: Width: {universe.GetLength(1)}\tHeight: {universe.GetLength(0)}";
 
-                    e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
+                    // Outline the cell with a pen
+                    e.Graphics.DrawRectangle(x10GridPen, cellRectx10.X, cellRectx10.Y, cellRectx10.Width, cellRectx10.Height);
                 }
+            }
+            //end x10 grid code
+
+            //Draw Hud
+            if (HudVisible == true)
+             {
+                Font font1 = new Font("Arial", 15f);
+
+                StringFormat stringFormatHud = new StringFormat();
+                stringFormatHud.Alignment = StringAlignment.Near;
+                stringFormatHud.LineAlignment = StringAlignment.Far;
+
+
+                
+
+
+                Rectangle rect = graphicsPanel1.ClientRectangle;
+                string hud = $"Generations: {generations}\nCell Count: {CountAlive()}\nBoundry Type: {boundry}\nUniverse Size: Width: {universe.GetLength(1)}\tHeight: {universe.GetLength(0)}";
+
+                e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
+             }
             
 
 
@@ -292,7 +315,29 @@ namespace HooverGOL122022
             cellBrush.Dispose();
         }
         
+        //public void DrawHud()
+        //{
+        //      if (HudVisible == true)
+        //        {
+        //            Font font1 = new Font("Arial", 15f);
 
+        //            StringFormat stringFormatHud = new StringFormat();
+        //            stringFormatHud.Alignment = StringAlignment.Near;
+        //            stringFormatHud.LineAlignment = StringAlignment.Far;
+
+        //            string boundry = "Finite";
+        //            if (toroidal == true)
+        //            {
+        //                boundry = "Toroidal";
+        //            }
+
+
+        //            Rectangle rect = graphicsPanel1.ClientRectangle;
+        //            string hud = $"Generations: {generations}\nCell Count: {CountAlive()}\nBoundry Type: {boundry}\nUniverse Size: Width: {universe.GetLength(1)}\tHeight: {universe.GetLength(0)}";
+
+        //            e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
+        //        }
+        //}
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             // If the left mouse button was clicked
@@ -671,7 +716,7 @@ namespace HooverGOL122022
                 for (int x = 1; x <= 1; x++)
                 {
 
-                     resizeUniverse[y, x] = original[y, x];
+                     resizeUniverse[x,y] = original[x,y];
 
 
                 }
@@ -704,7 +749,7 @@ namespace HooverGOL122022
             Properties.Settings.Default.GridOn = gridOn;
             Properties.Settings.Default.Miliseconds = timer.Interval;
             Properties.Settings.Default.Seed = seed;
-
+           
 
 
 
@@ -751,9 +796,24 @@ namespace HooverGOL122022
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            toroidal = true;
-            
-        }
+     
+
+            //if (toroidal == false)
+            //{
+            //    toroidal = true;               
+            //    ToolStripMenuItemToroidal.Checked = true;
+            //    boundry = "Toroidal";
+            //}
+            //else
+            //{
+            //    toroidal = false;
+            //    ToolStripMenuItemToroidal.Checked = false;
+               
+            //    boundry = "Finite";
+            //}
+
+            //graphicsPanel1.Invalidate();
+        }//not used
 
         private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1092,6 +1152,30 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
 
 
+        }
+
+        private void finiteToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toroidalFiniteSwitchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (toroidal == false)
+            {
+                toroidal = true;
+                toroidalFiniteSwitchToolStripMenuItem.Checked = true;
+                boundry = "Toroidal";
+            }
+            else
+            {
+                toroidal = false;
+                toroidalFiniteSwitchToolStripMenuItem.Checked = false;
+
+                boundry = "Finite";
+            }
+
+            graphicsPanel1.Invalidate();
         }
     }
 }

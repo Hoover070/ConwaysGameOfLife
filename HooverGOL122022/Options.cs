@@ -48,11 +48,7 @@ namespace HooverGOL122022
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
-            if(checkBox1.Checked) 
-            {
-                
-
-            }
+            
         }
     }
 }
