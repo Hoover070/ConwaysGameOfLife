@@ -48,6 +48,10 @@ namespace HooverGOL122022
         //int for the random seed
         int seed = 1405029;
 
+        bool HudVisible = true;
+
+        
+
 
         public Form1()
         {
@@ -274,7 +278,29 @@ namespace HooverGOL122022
                         }
                     }
                 }
-                
+
+
+                //Draw Hud
+                if(HudVisible == true)
+                {
+                    Font font1 = new Font("Arial", 15f);
+
+                    StringFormat stringFormatHud = new StringFormat();
+                    stringFormatHud.Alignment = StringAlignment.Near;
+                    stringFormatHud.LineAlignment = StringAlignment.Far;
+
+                    string boundry = "Finite";
+                    if(toroidal == true)
+                    {
+                        boundry = "Toroidal";
+                    }
+
+
+                    Rectangle rect = graphicsPanel1.ClientRectangle;
+                    string hud = $"Generations: {generations}\nCell Count: {CountAlive()}\nBoundry Type: {boundry}\nUniverse Size: Width: {universe.GetLength(1)}\tHeight: {universe.GetLength(0)}";
+
+                    e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
+                }
 
                 // Cleaning up pens and brushes
                 gridPen.Dispose();
@@ -1010,6 +1036,77 @@ namespace HooverGOL122022
 
 
             return count;
+        }
+
+        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+           if(HudVisible ==false)
+            {
+                //make the hud visible
+                HudVisible = true;
+                //checks the hud option
+                ToolStripMenuItemHud.Checked = true;
+
+
+            }
+            else
+            {
+                //makes the hud invisible
+                HudVisible = false;
+                //unchecks the hud option
+                ToolStripMenuItemHud.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
+
+        }
+
+        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (neighborCount == false)
+            {
+                //make the hud visible
+                neighborCount = true;
+                //checks the hud option
+                ToolStripMenuItemNeighborCount.Checked = true;
+
+
+            }
+            else
+            {
+                //makes the hud invisible
+                neighborCount = false;
+                //unchecks the hud option
+                ToolStripMenuItemNeighborCount.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
+
+
+
+        }
+
+        private void gridOnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gridOn == false)
+            {
+                //make the hud visible
+                gridOn = true;
+                //checks the hud option
+                ToolStripMenuItemGridOn.Checked = true;
+
+
+            }
+            else
+            {
+                //makes the hud invisible
+                gridOn = false;
+                //unchecks the hud option
+                ToolStripMenuItemGridOn.Checked = false;
+            }
+            graphicsPanel1.Invalidate();
+
+
         }
     }
 }

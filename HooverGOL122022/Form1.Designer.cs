@@ -46,6 +46,9 @@ namespace HooverGOL122022
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemHud = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemGridOn = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.startToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,6 +69,7 @@ namespace HooverGOL122022
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.finiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -77,9 +81,9 @@ namespace HooverGOL122022
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelInterval = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelLivingCells = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelSeed = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelInterval = new System.Windows.Forms.ToolStripStatusLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.gridColorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,7 +112,7 @@ namespace HooverGOL122022
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1077, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1077, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -127,7 +131,7 @@ namespace HooverGOL122022
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 32);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 30);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -136,7 +140,7 @@ namespace HooverGOL122022
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.newToolStripMenuItem.Text = "&New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -146,21 +150,21 @@ namespace HooverGOL122022
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(220, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -168,21 +172,21 @@ namespace HooverGOL122022
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -190,7 +194,7 @@ namespace HooverGOL122022
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -198,26 +202,57 @@ namespace HooverGOL122022
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(223, 34);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemHud,
+            this.ToolStripMenuItemGridOn,
+            this.ToolStripMenuItemNeighborCount});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 32);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(65, 30);
             this.viewToolStripMenuItem.Text = "View";
+            // 
+            // ToolStripMenuItemHud
+            // 
+            this.ToolStripMenuItemHud.Checked = true;
+            this.ToolStripMenuItemHud.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ToolStripMenuItemHud.Name = "ToolStripMenuItemHud";
+            this.ToolStripMenuItemHud.Size = new System.Drawing.Size(270, 34);
+            this.ToolStripMenuItemHud.Text = "&HUD";
+            this.ToolStripMenuItemHud.Click += new System.EventHandler(this.hUDToolStripMenuItem1_Click);
+            // 
+            // ToolStripMenuItemGridOn
+            // 
+            this.ToolStripMenuItemGridOn.Checked = true;
+            this.ToolStripMenuItemGridOn.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ToolStripMenuItemGridOn.Name = "ToolStripMenuItemGridOn";
+            this.ToolStripMenuItemGridOn.Size = new System.Drawing.Size(270, 34);
+            this.ToolStripMenuItemGridOn.Text = "&Grid On";
+            this.ToolStripMenuItemGridOn.Click += new System.EventHandler(this.gridOnToolStripMenuItem_Click);
+            // 
+            // ToolStripMenuItemNeighborCount
+            // 
+            this.ToolStripMenuItemNeighborCount.Checked = true;
+            this.ToolStripMenuItemNeighborCount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ToolStripMenuItemNeighborCount.Name = "ToolStripMenuItemNeighborCount";
+            this.ToolStripMenuItemNeighborCount.Size = new System.Drawing.Size(270, 34);
+            this.ToolStripMenuItemNeighborCount.Text = "Neighbor Count";
+            this.ToolStripMenuItemNeighborCount.Click += new System.EventHandler(this.neighborCountToolStripMenuItem_Click);
             // 
             // runToolStripMenuItem
             // 
@@ -226,7 +261,7 @@ namespace HooverGOL122022
             this.pauseToolStripMenuItem,
             this.nextToolStripMenuItem});
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(59, 32);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(59, 30);
             this.runToolStripMenuItem.Text = "Run";
             // 
             // startToolStripMenuItem
@@ -254,7 +289,7 @@ namespace HooverGOL122022
             this.fromCurrentSeedToolStripMenuItem,
             this.fromTimeToolStripMenuItem});
             this.randomizeToolStripMenuItem.Name = "randomizeToolStripMenuItem";
-            this.randomizeToolStripMenuItem.Size = new System.Drawing.Size(117, 32);
+            this.randomizeToolStripMenuItem.Size = new System.Drawing.Size(117, 30);
             this.randomizeToolStripMenuItem.Text = "Randomize";
             // 
             // fromSeedToolStripMenuItem
@@ -291,9 +326,10 @@ namespace HooverGOL122022
             this.resetToolStripMenuItem,
             this.reloadToolStripMenuItem,
             this.toolStripSeparator8,
-            this.toolStripMenuItem1});
+            this.toolStripMenuItem1,
+            this.finiteToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(92, 32);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(92, 30);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // cellColorToolStripMenuItem
@@ -362,11 +398,21 @@ namespace HooverGOL122022
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.Checked = true;
+            this.toolStripMenuItem1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(228, 34);
             this.toolStripMenuItem1.Text = "Torodial";
             this.toolStripMenuItem1.CheckedChanged += new System.EventHandler(this.toolStripMenuItem1_Click);
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // finiteToolStripMenuItem
+            // 
+            this.finiteToolStripMenuItem.Checked = true;
+            this.finiteToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.finiteToolStripMenuItem.Name = "finiteToolStripMenuItem";
+            this.finiteToolStripMenuItem.Size = new System.Drawing.Size(228, 34);
+            this.finiteToolStripMenuItem.Text = "Finite";
             // 
             // toolStrip1
             // 
@@ -380,10 +426,10 @@ namespace HooverGOL122022
             this.toolStripButton2,
             this.toolStripButton3,
             this.toolStripSeparator7});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 33);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 36);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(1077, 33);
+            this.toolStrip1.Size = new System.Drawing.Size(1077, 38);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -479,12 +525,6 @@ namespace HooverGOL122022
             this.toolStripStatusLabelGenerations.Text = "Generations: 0";
             this.toolStripStatusLabelGenerations.Click += new System.EventHandler(this.toolStripStatusLabelGenerations_Click);
             // 
-            // toolStripStatusLabelInterval
-            // 
-            this.toolStripStatusLabelInterval.Name = "toolStripStatusLabelInterval";
-            this.toolStripStatusLabelInterval.Size = new System.Drawing.Size(89, 25);
-            this.toolStripStatusLabelInterval.Text = "Interval: 0";
-            // 
             // toolStripStatusLabelLivingCells
             // 
             this.toolStripStatusLabelLivingCells.Name = "toolStripStatusLabelLivingCells";
@@ -496,6 +536,12 @@ namespace HooverGOL122022
             this.toolStripStatusLabelSeed.Name = "toolStripStatusLabelSeed";
             this.toolStripStatusLabelSeed.Size = new System.Drawing.Size(75, 25);
             this.toolStripStatusLabelSeed.Text = "Seed : 0";
+            // 
+            // toolStripStatusLabelInterval
+            // 
+            this.toolStripStatusLabelInterval.Name = "toolStripStatusLabelInterval";
+            this.toolStripStatusLabelInterval.Size = new System.Drawing.Size(89, 25);
+            this.toolStripStatusLabelInterval.Text = "Interval: 0";
             // 
             // contextMenuStrip1
             // 
@@ -565,10 +611,10 @@ namespace HooverGOL122022
             this.graphicsPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.graphicsPanel1.ContextMenuStrip = this.contextMenuStrip1;
             this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphicsPanel1.Location = new System.Drawing.Point(0, 66);
+            this.graphicsPanel1.Location = new System.Drawing.Point(0, 74);
             this.graphicsPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.graphicsPanel1.Name = "graphicsPanel1";
-            this.graphicsPanel1.Size = new System.Drawing.Size(1077, 640);
+            this.graphicsPanel1.Size = new System.Drawing.Size(1077, 632);
             this.graphicsPanel1.TabIndex = 3;
             this.graphicsPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.graphicsPanel1_Paint);
             this.graphicsPanel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphicsPanel1_MouseClick);
@@ -659,6 +705,10 @@ namespace HooverGOL122022
         private System.Windows.Forms.ToolStripMenuItem cellColorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemHud;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemGridOn;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemNeighborCount;
+        private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItem;
     }
 }
 
