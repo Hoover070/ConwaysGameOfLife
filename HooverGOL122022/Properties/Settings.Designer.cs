@@ -61,7 +61,7 @@ namespace HooverGOL122022.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("WhiteSmoke")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Window")]
         public global::System.Drawing.Color BackColor {
             get {
                 return ((global::System.Drawing.Color)(this["BackColor"]));
