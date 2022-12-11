@@ -140,7 +140,16 @@ namespace HooverGOL122022
             generations++;
 
             // Update status strip generations
-            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
+
+            //update stats strip Aivecell count
+            toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
+
+            //update states strip Seed
+            toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
+
+            //update Stats strip Interval(miliseconds between geneartions)
+            toolStripStatusLabelInterval.Text = "Interval : " + timer.Interval.ToString();
 
             //place invalidate
             graphicsPanel1.Invalidate();
@@ -966,8 +975,41 @@ namespace HooverGOL122022
                 
                 // Close the file.
                 reader.Close();
+
+                // Update status strip generations
+                toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
+
+                //update stats strip Aivecell count
+                toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
+
+                //update states strip Seed
+                toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
+
+                //update Stats strip Interval(miliseconds between geneartions)
+                toolStripStatusLabelInterval.Text = "Geneartion Interval : " + timer.Interval.ToString();
+
+
                 graphicsPanel1.Invalidate();
             }
+        }
+
+        public int CountAlive()
+        {
+            int count = 0;  
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    if (universe[x,y] == true)
+                    {
+                        count++;
+                    }
+                }
+            }
+
+
+            return count;
         }
     }
 }
