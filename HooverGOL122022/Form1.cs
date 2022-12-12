@@ -52,7 +52,6 @@ namespace HooverGOL122022
         //bool to show generation count at the bottom
         bool showInfo = true;
 
-
         public Form1()
         {
             InitializeComponent();
@@ -84,14 +83,13 @@ namespace HooverGOL122022
 
         }
 
-
         public void BoundryUpdate()
         {
             if(toroidal) { boundry = "Toroidal"; }
             else { boundry = "Finite"; }
-        }
-        // Calculate the next generation of cells
-        private void NextGeneration() //to boldly go where no one has gone before
+        }//updates the boundry string for the hud
+       
+        private void NextGeneration() //to boldly go where no one has gone before, calculating the next generation of cells
         {
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -151,45 +149,10 @@ namespace HooverGOL122022
             // Increment generation count
             generations++;
 
-            //show generations - toggles on and off ALL the info on the bottom of the panel
-            //if (showInfo)
-            //{
-
-            //    // Update status strip generations
-            //    toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
-
-            //    //update stats strip Aivecell count
-            //    toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
-
-            //    //update states strip Seed
-            //    toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
-
-            //    //update Stats strip Interval(miliseconds between geneartions)
-            //    toolStripStatusLabelInterval.Text = "Interval : " + timer.Interval.ToString();
-            //}
-            //else
-            //{
-            //    // Update status strip generations
-            //    toolStripStatusLabelGenerations.Text = " ";
-
-            //    //update stats strip Aivecell count
-            //    toolStripStatusLabelLivingCells.Text = " ";
-
-            //    //update states strip Seed
-            //    toolStripStatusLabelSeed.Text = " ";
-
-            //    //update Stats strip Interval(miliseconds between geneartions)
-            //    toolStripStatusLabelInterval.Text = " ";
-            
-            
-            //}
-            //place invalidate
             graphicsPanel1.Invalidate();
         }
 
-
-        // The event called by the timer every Interval milliseconds.
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)// The event called by the timer every Interval milliseconds.
         {
             NextGeneration();
         }
@@ -375,29 +338,6 @@ namespace HooverGOL122022
             cellBrush.Dispose();
         }
         
-        //public void DrawHud()
-        //{
-        //      if (HudVisible == true)
-        //        {
-        //            Font font1 = new Font("Arial", 15f);
-
-        //            StringFormat stringFormatHud = new StringFormat();
-        //            stringFormatHud.Alignment = StringAlignment.Near;
-        //            stringFormatHud.LineAlignment = StringAlignment.Far;
-
-        //            string boundry = "Finite";
-        //            if (toroidal == true)
-        //            {
-        //                boundry = "Toroidal";
-        //            }
-
-
-        //            Rectangle rect = graphicsPanel1.ClientRectangle;
-        //            string hud = $"Generations: {generations}\nCell Count: {CountAlive()}\nBoundry Type: {boundry}\nUniverse Size: Width: {universe.GetLength(1)}\tHeight: {universe.GetLength(0)}";
-
-        //            e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
-        //        }
-        //}
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
         {
             // If the left mouse button was clicked
@@ -423,7 +363,7 @@ namespace HooverGOL122022
                 //never place invalidate inside of paint
                 graphicsPanel1.Invalidate();
             }
-        }
+        }//graphics panel function
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)//close the program
         {
@@ -497,9 +437,9 @@ namespace HooverGOL122022
                 }
             }
             return count;
-        }
+        }//once reaching the end of the universe the cell stops
 
-        private int CountNeighborsToroidal(int x, int y) //does not currently work
+        private int CountNeighborsToroidal(int x, int y) //after reaching the end of the universe, the cell moves to the other side
         {
             //initiate the variables used
             int count = 0;
@@ -556,7 +496,7 @@ namespace HooverGOL122022
                     scratchpad[x, y] = false;
                 }
             }           
-        }
+        }//not used- clears scratchpad
         public void Clear()
         {
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -571,7 +511,7 @@ namespace HooverGOL122022
             generations -= 1;
             //NextGeneration();
             graphicsPanel1.Invalidate();
-        }
+        }//clears the board and scratchpad function
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)//clears the board but does not start a new game
         {
@@ -588,7 +528,7 @@ namespace HooverGOL122022
 
 
         }
-        private void RandomGameTime()
+        private void RandomGameTime()//random game from the game time
         {
            
             // Cycle cells using rand to set live/dead cells
@@ -617,7 +557,7 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
 
         }
-        private void RandomGameSeed()
+        private void RandomGameSeed()//creates a random game from the default/current seed
         {
 
             // Cycle cells using rand to set live/dead cells
@@ -645,30 +585,28 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
         }
 
-        private void torodialToolStripMenuItem_Click(object sender, EventArgs e)
+        private void torodialToolStripMenuItem_Click(object sender, EventArgs e)//not used
         {
-            //updates the torodial bool to true 
-            toroidal= true;
+           
 
         }
 
-        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)//not used
         {
-            //updates the torodial bool to default false
-            toroidal= false;
+           
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)//not used
         {
 
         }
 
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)//not used
         {
 
         }
 
-        private void toolStripStatusLabelGenerations_Click(object sender, EventArgs e)
+        private void toolStripStatusLabelGenerations_Click(object sender, EventArgs e)//turns on and off the info at the bottom of the screen
         {
             if(showInfo == true)
             {
@@ -683,7 +621,7 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
         }
 
-        private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void backColorToolStripMenuItem_Click(object sender, EventArgs e)//changes the color of the background
         {
             ColorDialog dlg = new ColorDialog();
 
@@ -698,7 +636,7 @@ namespace HooverGOL122022
 
         }
 
-        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void cellColorToolStripMenuItem_Click(object sender, EventArgs e)//not used
         {
             //ColorDialog dlg = new ColorDialog();
 
@@ -706,7 +644,7 @@ namespace HooverGOL122022
 
         }
 
-        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void gridColorToolStripMenuItem_Click(object sender, EventArgs e)//changes teh color of the regular grid
         {
             ColorDialog dlg = new ColorDialog();
 
@@ -719,7 +657,7 @@ namespace HooverGOL122022
             }
         }
 
-        private void gridX10ColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void gridX10ColorToolStripMenuItem_Click(object sender, EventArgs e) //changes the color of the x10 grid
         {
             ColorDialog dlg = new ColorDialog();
 
@@ -732,7 +670,7 @@ namespace HooverGOL122022
             }
         }
 
-        private void cellColorToolStripMenuItem_Click_1(object sender, EventArgs e)
+        private void cellColorToolStripMenuItem_Click_1(object sender, EventArgs e)//changes the color of the cell
         {
             ColorDialog dlg = new ColorDialog();
 
@@ -747,7 +685,7 @@ namespace HooverGOL122022
             }
         }
 
-        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void optionsToolStripMenuItem1_Click(object sender, EventArgs e)//function to activate the options form 
         {
             int width = (int)universe.GetLength(0);
             int height = (int)universe.GetLength(1);
@@ -772,11 +710,8 @@ namespace HooverGOL122022
             }
 
         }
-
-        //the resize array function
-        //takes in a bool array and then creates a new array with the values provided
-        //then it copies the original array to the resize array and rturns the resized array
-        bool[,] ResizeUniverse<T>( int rows, int columns)
+        
+        bool[,] ResizeUniverse<T>( int rows, int columns)//the resize array function,creates a new array with the values provided 
         {
             //instatiate resizearray
             var resizeUniverse = new bool[rows, columns];
@@ -816,7 +751,7 @@ namespace HooverGOL122022
             //saving the updates
             Properties.Settings.Default.Save();
 
-        }
+        }//what settings are saved when the form is closed
 
         private void resetToolStripMenuItem_Click(object sender, EventArgs e) //loads the default settings
         {
@@ -880,7 +815,7 @@ namespace HooverGOL122022
             //graphicsPanel1.Invalidate();
         }//not used
 
-        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void fromSeedToolStripMenuItem_Click(object sender, EventArgs e)//random game from seed provided by the user
         {
             RandomSeed dlg = new RandomSeed();
            
@@ -896,18 +831,18 @@ namespace HooverGOL122022
             }
         }
 
-        private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void fromCurrentSeedToolStripMenuItem_Click(object sender, EventArgs e) //random game from seed last used or default
         {
             seed = Properties.Settings.Default.Seed;
             RandomGameSeed();
         }
 
-        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void fromTimeToolStripMenuItem_Click(object sender, EventArgs e) //random game from time of the system
         {
             RandomGameTime();
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) //save menu to save the world
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.Filter = "All Files |*.*|Cells|*.cells";
@@ -960,7 +895,7 @@ namespace HooverGOL122022
                         // After all rows and columns have been written then close the file.
                         writer.Close(); 
                     }
-        } //need to change this to save to a file if one is open otherwise ask for filename
+        } 
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1129,7 +1064,7 @@ namespace HooverGOL122022
             }
         }
 
-        public int CountAlive()
+        public int CountAlive() //function to count the alive neighbors and return an int
         {
             int count = 0;  
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -1148,7 +1083,7 @@ namespace HooverGOL122022
             return count;
         }
 
-        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void hUDToolStripMenuItem1_Click(object sender, EventArgs e) //function to toggle on and off the hud
         {
             
            if(HudVisible ==false)
@@ -1194,7 +1129,7 @@ namespace HooverGOL122022
 
 
 
-        }
+        }//function to turn on and off the neighbor count on the screen, but keeps the neighbor count going
 
         private void gridOnToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1217,14 +1152,14 @@ namespace HooverGOL122022
             graphicsPanel1.Invalidate();
 
 
-        }
+        }//function to turn on and off the grid
 
         private void finiteToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
 
-        }
+        }//not used
 
-        private void toroidalFiniteSwitchToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toroidalFiniteSwitchToolStripMenuItem_Click(object sender, EventArgs e) //switches between toroidal and finite ways of the world moving
         {
             if (toroidal == false)
             {
