@@ -42,7 +42,7 @@ namespace HooverGOL122022
         bool gridOn = true;
 
         //int for the random seed
-        int seed = 1405029;
+        int seed;
 
         bool HudVisible = true;
 
@@ -67,8 +67,8 @@ namespace HooverGOL122022
             cellColor = Properties.Settings.Default.CellColor;
 
             //loading in settings for the grid
-            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
-            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            universe = ResizeUniverse<bool>( Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
@@ -77,10 +77,17 @@ namespace HooverGOL122022
             //loading random seed
             seed = Properties.Settings.Default.Seed;
 
+            BoundryUpdate();
            
 
         }
 
+
+        public void BoundryUpdate()
+        {
+            if(toroidal) { boundry = "Toroidal"; }
+            else { boundry = "Finite"; }
+        }
         // Calculate the next generation of cells
         private void NextGeneration() //to boldly go where no one has gone before
         {
@@ -459,28 +466,28 @@ namespace HooverGOL122022
                         continue;
                     }
                     // if xCheck is less than 0 then set to xLen - 1
-                    else if (xCheck < 0)
+                    if (xCheck < 0)
                     {
-                        xLen = -1;
+                        xCheck = xLen - 1;
                     }
                     // if yCheck is less than 0 then set to yLen - 1
-                    else if (yCheck < 0)
+                    if (yCheck < 0)
                     {
-                        yLen = -1;
+                        yCheck = yLen -1;
                     }
                     // if xCheck is greater than or equal too xLen then set to 0
-                    else if (xCheck >= xLen)
+                    if (xCheck >= xLen)
                     {
-                        xLen = 0;
+                        xCheck = 0;
                     }
                     // if yCheck is greater than or equal too yLen then set to 0
-                    else if (yCheck >= yLen)
+                    if (yCheck >= yLen)
                     {
-                        yLen = 0;
+                        yCheck = 0;
                     }
 
                     //default if nothing else is correct
-                    else if (universe[xCheck, yCheck] == true) { count++; }
+                    if (universe[xCheck, yCheck] == true) { count++; }
                 }
             }
             return count;
@@ -695,8 +702,8 @@ namespace HooverGOL122022
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 timer.Interval = (int)dlg.TimerMiliseconds;
-                universe = ResizeUniverse<bool>(universe, dlg.WidthUniverse, dlg.HeightUniverse) ;
-                scratchpad = ResizeUniverse<bool>(scratchpad, dlg.WidthUniverse, dlg.HeightUniverse);
+                universe = ResizeUniverse<bool>( dlg.WidthUniverse, dlg.HeightUniverse) ;
+                scratchpad = ResizeUniverse<bool>( dlg.WidthUniverse, dlg.HeightUniverse);
                 graphicsPanel1.Invalidate();
 
             }
@@ -706,21 +713,11 @@ namespace HooverGOL122022
         //the resize array function
         //takes in a bool array and then creates a new array with the values provided
         //then it copies the original array to the resize array and rturns the resized array
-        bool[,] ResizeUniverse<T>(bool[,] original,  int rows, int columns)
+        bool[,] ResizeUniverse<T>( int rows, int columns)
         {
             //instatiate resizearray
             var resizeUniverse = new bool[rows, columns];
 
-            for (int y = 0; y <= 0; y++)
-            {
-                for (int x = 1; x <= 1; x++)
-                {
-
-                     resizeUniverse[x,y] = original[x,y];
-
-
-                }
-            }
             return resizeUniverse;
         }
 
@@ -768,8 +765,8 @@ namespace HooverGOL122022
             cellColor = Properties.Settings.Default.CellColor;
 
             //loading in settings for the grid
-            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
-            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            universe = ResizeUniverse<bool>(Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>(Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
@@ -786,8 +783,8 @@ namespace HooverGOL122022
             cellColor = Properties.Settings.Default.CellColor;
 
             //loading in settings for the grid
-            universe = ResizeUniverse<bool>(universe, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
-            scratchpad = ResizeUniverse<bool>(scratchpad, Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            universe = ResizeUniverse<bool>( Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
+            scratchpad = ResizeUniverse<bool>( Properties.Settings.Default.UniverseY, Properties.Settings.Default.UniverseX);
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
@@ -1165,14 +1162,14 @@ namespace HooverGOL122022
             {
                 toroidal = true;
                 toroidalFiniteSwitchToolStripMenuItem.Checked = true;
-                boundry = "Toroidal";
+                BoundryUpdate();
             }
             else
             {
                 toroidal = false;
                 toroidalFiniteSwitchToolStripMenuItem.Checked = false;
 
-                boundry = "Finite";
+                BoundryUpdate();
             }
 
             graphicsPanel1.Invalidate();
