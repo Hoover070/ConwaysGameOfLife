@@ -68,6 +68,7 @@ namespace HooverGOL122022
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toroidalFiniteSwitchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +92,6 @@ namespace HooverGOL122022
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.hUDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toroidalFiniteSwitchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graphicsPanel1 = new HooverGOL122022.GraphicsPanel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -294,21 +294,21 @@ namespace HooverGOL122022
             // fromSeedToolStripMenuItem
             // 
             this.fromSeedToolStripMenuItem.Name = "fromSeedToolStripMenuItem";
-            this.fromSeedToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fromSeedToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.fromSeedToolStripMenuItem.Text = "From Seed";
             this.fromSeedToolStripMenuItem.Click += new System.EventHandler(this.fromSeedToolStripMenuItem_Click);
             // 
             // fromCurrentSeedToolStripMenuItem
             // 
             this.fromCurrentSeedToolStripMenuItem.Name = "fromCurrentSeedToolStripMenuItem";
-            this.fromCurrentSeedToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fromCurrentSeedToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.fromCurrentSeedToolStripMenuItem.Text = "From Current Seed";
             this.fromCurrentSeedToolStripMenuItem.Click += new System.EventHandler(this.fromCurrentSeedToolStripMenuItem_Click);
             // 
             // fromTimeToolStripMenuItem
             // 
             this.fromTimeToolStripMenuItem.Name = "fromTimeToolStripMenuItem";
-            this.fromTimeToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.fromTimeToolStripMenuItem.Size = new System.Drawing.Size(263, 34);
             this.fromTimeToolStripMenuItem.Text = "From Time";
             this.fromTimeToolStripMenuItem.Click += new System.EventHandler(this.fromTimeToolStripMenuItem_Click);
             // 
@@ -393,6 +393,15 @@ namespace HooverGOL122022
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             this.toolStripSeparator8.Size = new System.Drawing.Size(279, 6);
+            // 
+            // toroidalFiniteSwitchToolStripMenuItem
+            // 
+            this.toroidalFiniteSwitchToolStripMenuItem.Checked = true;
+            this.toroidalFiniteSwitchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toroidalFiniteSwitchToolStripMenuItem.Name = "toroidalFiniteSwitchToolStripMenuItem";
+            this.toroidalFiniteSwitchToolStripMenuItem.Size = new System.Drawing.Size(282, 34);
+            this.toroidalFiniteSwitchToolStripMenuItem.Text = "Toroidal/Finite Switch";
+            this.toroidalFiniteSwitchToolStripMenuItem.Click += new System.EventHandler(this.toroidalFiniteSwitchToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -532,7 +541,7 @@ namespace HooverGOL122022
             this.hUDToolStripMenuItem,
             this.generationsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(179, 106);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 139);
             // 
             // gridColorToolStripMenuItem1
             // 
@@ -542,32 +551,36 @@ namespace HooverGOL122022
             this.x10GridColorToolStripMenuItem,
             this.cellColorToolStripMenuItem1});
             this.gridColorToolStripMenuItem1.Name = "gridColorToolStripMenuItem1";
-            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(178, 32);
+            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(240, 32);
             this.gridColorToolStripMenuItem1.Text = "Color";
             // 
             // backgroundColorToolStripMenuItem
             // 
             this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(257, 34);
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.backgroundColorToolStripMenuItem.Text = "Background Color";
+            this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backColorToolStripMenuItem_Click);
             // 
             // gridColorToolStripMenuItem2
             // 
             this.gridColorToolStripMenuItem2.Name = "gridColorToolStripMenuItem2";
-            this.gridColorToolStripMenuItem2.Size = new System.Drawing.Size(257, 34);
+            this.gridColorToolStripMenuItem2.Size = new System.Drawing.Size(270, 34);
             this.gridColorToolStripMenuItem2.Text = "Grid Color";
+            this.gridColorToolStripMenuItem2.Click += new System.EventHandler(this.gridColorToolStripMenuItem_Click);
             // 
             // x10GridColorToolStripMenuItem
             // 
             this.x10GridColorToolStripMenuItem.Name = "x10GridColorToolStripMenuItem";
-            this.x10GridColorToolStripMenuItem.Size = new System.Drawing.Size(257, 34);
+            this.x10GridColorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.x10GridColorToolStripMenuItem.Text = "x10 Grid Color";
+            this.x10GridColorToolStripMenuItem.Click += new System.EventHandler(this.gridX10ColorToolStripMenuItem_Click);
             // 
             // cellColorToolStripMenuItem1
             // 
             this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
-            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(257, 34);
+            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
             this.cellColorToolStripMenuItem1.Text = "Cell Color";
+            this.cellColorToolStripMenuItem1.Click += new System.EventHandler(this.cellColorToolStripMenuItem_Click_1);
             // 
             // toolStripSeparator5
             // 
@@ -579,21 +592,14 @@ namespace HooverGOL122022
             this.hUDToolStripMenuItem.Name = "hUDToolStripMenuItem";
             this.hUDToolStripMenuItem.Size = new System.Drawing.Size(178, 32);
             this.hUDToolStripMenuItem.Text = "HUD";
+            this.hUDToolStripMenuItem.Click += new System.EventHandler(this.hUDToolStripMenuItem1_Click);
             // 
             // generationsToolStripMenuItem
             // 
             this.generationsToolStripMenuItem.Name = "generationsToolStripMenuItem";
             this.generationsToolStripMenuItem.Size = new System.Drawing.Size(178, 32);
             this.generationsToolStripMenuItem.Text = "Generations";
-            // 
-            // toroidalFiniteSwitchToolStripMenuItem
-            // 
-            this.toroidalFiniteSwitchToolStripMenuItem.Checked = true;
-            this.toroidalFiniteSwitchToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toroidalFiniteSwitchToolStripMenuItem.Name = "toroidalFiniteSwitchToolStripMenuItem";
-            this.toroidalFiniteSwitchToolStripMenuItem.Size = new System.Drawing.Size(282, 34);
-            this.toroidalFiniteSwitchToolStripMenuItem.Text = "Toroidal/Finite Switch";
-            this.toroidalFiniteSwitchToolStripMenuItem.Click += new System.EventHandler(this.toroidalFiniteSwitchToolStripMenuItem_Click);
+            this.generationsToolStripMenuItem.Click += new System.EventHandler(this.toolStripStatusLabelGenerations_Click);
             // 
             // graphicsPanel1
             // 

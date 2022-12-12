@@ -49,6 +49,8 @@ namespace HooverGOL122022
         //string for boundry 
         string boundry = string.Empty;
 
+        //bool to show generation count at the bottom
+        bool showInfo = true;
 
 
         public Form1()
@@ -72,7 +74,7 @@ namespace HooverGOL122022
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
-           
+            showInfo = Properties.Settings.Default.showInfo;
 
             //loading random seed
             seed = Properties.Settings.Default.Seed;
@@ -149,18 +151,38 @@ namespace HooverGOL122022
             // Increment generation count
             generations++;
 
-            // Update status strip generations
-            toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
+            //show generations - toggles on and off ALL the info on the bottom of the panel
+            //if (showInfo)
+            //{
 
-            //update stats strip Aivecell count
-            toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
+            //    // Update status strip generations
+            //    toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
 
-            //update states strip Seed
-            toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
+            //    //update stats strip Aivecell count
+            //    toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
 
-            //update Stats strip Interval(miliseconds between geneartions)
-            toolStripStatusLabelInterval.Text = "Interval : " + timer.Interval.ToString();
+            //    //update states strip Seed
+            //    toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
 
+            //    //update Stats strip Interval(miliseconds between geneartions)
+            //    toolStripStatusLabelInterval.Text = "Interval : " + timer.Interval.ToString();
+            //}
+            //else
+            //{
+            //    // Update status strip generations
+            //    toolStripStatusLabelGenerations.Text = " ";
+
+            //    //update stats strip Aivecell count
+            //    toolStripStatusLabelLivingCells.Text = " ";
+
+            //    //update states strip Seed
+            //    toolStripStatusLabelSeed.Text = " ";
+
+            //    //update Stats strip Interval(miliseconds between geneartions)
+            //    toolStripStatusLabelInterval.Text = " ";
+            
+            
+            //}
             //place invalidate
             graphicsPanel1.Invalidate();
         }
@@ -313,8 +335,39 @@ namespace HooverGOL122022
 
                 e.Graphics.DrawString(hud, font1, Brushes.Black, rect, stringFormatHud);
              }
-            
 
+            //show generations - toggles on and off ALL the info on the bottom of the panel
+            if (showInfo)
+            {
+
+                // Update status strip generations
+                toolStripStatusLabelGenerations.Text = "Generations : " + generations.ToString();
+
+                //update stats strip Aivecell count
+                toolStripStatusLabelLivingCells.Text = "Living Cells : " + CountAlive();
+
+                //update states strip Seed
+                toolStripStatusLabelSeed.Text = "Seed : " + seed.ToString();
+
+                //update Stats strip Interval(miliseconds between geneartions)
+                toolStripStatusLabelInterval.Text = "Interval : " + timer.Interval.ToString();
+            }
+            else
+            {
+                // Update status strip generations
+                toolStripStatusLabelGenerations.Text = " ";
+
+                //update stats strip Aivecell count
+                toolStripStatusLabelLivingCells.Text = " ";
+
+                //update states strip Seed
+                toolStripStatusLabelSeed.Text = " ";
+
+                //update Stats strip Interval(miliseconds between geneartions)
+                toolStripStatusLabelInterval.Text = " ";
+
+
+            }
 
 
             // Cleaning up pens and brushes
@@ -617,7 +670,17 @@ namespace HooverGOL122022
 
         private void toolStripStatusLabelGenerations_Click(object sender, EventArgs e)
         {
+            if(showInfo == true)
+            {
+                showInfo= false;
+            }
+            else
+            {
+                showInfo = true;
+            }
+           
 
+            graphicsPanel1.Invalidate();
         }
 
         private void backColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -746,7 +809,7 @@ namespace HooverGOL122022
             Properties.Settings.Default.GridOn = gridOn;
             Properties.Settings.Default.Miliseconds = timer.Interval;
             Properties.Settings.Default.Seed = seed;
-           
+            Properties.Settings.Default.showInfo = showInfo;
 
 
 
@@ -770,6 +833,8 @@ namespace HooverGOL122022
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
+            showInfo = Properties.Settings.Default.showInfo;
+
             graphicsPanel1.Invalidate();
         }
 
@@ -788,6 +853,9 @@ namespace HooverGOL122022
             toroidal = Properties.Settings.Default.Finite;
             gridOn = Properties.Settings.Default.GridOn;
             timer.Interval = Properties.Settings.Default.Miliseconds;
+            showInfo = Properties.Settings.Default.showInfo;
+
+
             graphicsPanel1.Invalidate();
         }
 

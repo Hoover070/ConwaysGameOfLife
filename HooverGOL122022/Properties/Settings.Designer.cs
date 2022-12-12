@@ -154,5 +154,17 @@ namespace HooverGOL122022.Properties {
                 this["Seed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showInfo {
+            get {
+                return ((bool)(this["showInfo"]));
+            }
+            set {
+                this["showInfo"] = value;
+            }
+        }
     }
 }
