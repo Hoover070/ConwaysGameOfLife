@@ -1,4 +1,4 @@
-
+# Conway's Game of Life
 Welcome to this repository hosting a simulation of Conway's Game of Life, a cellular automaton devised by mathematician John Conway. This simulation is implemented using C# and Windows Forms to provide an interactive graphical user interface.
 
 Project Overview:
